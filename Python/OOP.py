@@ -2,7 +2,7 @@
 
 
 class Employee:
-    
+
     num_of_emps = 0
     raise_amount = 1.04
 
@@ -35,7 +35,7 @@ class Employee:
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amount)
 
-    def __repr__(self): # for dev
+    def __repr__(self):  # for dev
         return "Employee('{}', '{}', {})".format(self.first, self.last, self.pay)
 
     def __str__(self):  # for user
@@ -59,15 +59,15 @@ class Employee:
     @staticmethod
     def is_workday(day):    # Mon to Sun -> [0,6]
         if day.weekday() == 5 or day.weekday() == 6:
-            return False    
+            return False
         return True
 
-## Class as blueprint for creating instances
+# Class as blueprint for creating instances
 
 emp_1 = Employee('Zhangda', 'Xu', 30000)
 emp_2 = Employee('Test', 'User', 10000)
 
-print(emp_1,emp_2)
+print(emp_1, emp_2)
 
 print(emp_1.email, emp_2.email)
 
@@ -76,7 +76,7 @@ print(emp_1.fullname)
 # print(Employee.fullname(emp_1))
 
 
-## 2. Class variables
+# 2. Class variables
 
 emp_1.raise_amount = 1.05
 print(emp_1.raise_amount)
@@ -90,7 +90,7 @@ print(Employee.__dict__)
 print(Employee.num_of_emps)
 
 
-## 3. Class methods and static methods
+# 3. Class methods and static methods
 
 # Class methods as alternative constructors
 Employee.set_raise_amt(1.05)
@@ -100,7 +100,7 @@ print(emp_1.raise_amt)
 
 emp_str_1 = 'John-Doe-30000'
 
-new_emp_1 = Employee.from_string(emp_str_1) # creating an instance from string
+new_emp_1 = Employee.from_string(emp_str_1)  # creating an instance from string
 
 print(new_emp_1.email, new_emp_1.pay)
 
@@ -111,9 +111,9 @@ my_date = datetime.date(2020, 3, 25)
 print(Employee.is_workday(my_date))
 
 
-## 4. Inheritance and subclasses
+# 4. Inheritance and subclasses
 class Developer(Employee):  # method resolution order
-    
+
     raise_amt = 1.10
 
     def __init__(self, first, last, pay, lang):
@@ -128,7 +128,7 @@ class Manager(Employee):
     def __init__(self, first, last, pay, employees=None):
         super().__init__(first, last, pay)
         if employees is None:
-            self.employees = [] # empty list for missing input
+            self.employees = []  # empty list for missing input
         else:
             self.employees = employees
 
@@ -167,16 +167,16 @@ print(isinstance(new_mgr, Manager))
 print(issubclass(Developer, Manager))
 
 
-## 5. Magic methods
+# 5. Magic methods
 print(repr(emp_1))    # for dev
 
 print(str(emp_1))     # for end user
 
-print(1+2)
-print(int.__add__(1,2))
+print(1 + 2)
+print(int.__add__(1, 2))
 
-print('a'+'b')
-print(str.__add__('a','b'))
+print('a' + 'b')
+print(str.__add__('a', 'b'))
 
 # Adding two instances together
 print(emp_1 + emp_2)
@@ -185,7 +185,7 @@ print(emp_1 + emp_2)
 print(len(emp_1))
 
 
-## 6. Property decorators
+# 6. Property decorators
 emp_1.fullname = 'K X'
 print(emp_1.fullname)
 
