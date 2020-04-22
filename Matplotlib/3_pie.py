@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-plt.style.use('fivethirtyeight')
+plt.style.use('ggplot')
 
 slices = [59219, 55466, 47544, 36443, 35917]
 labels = ['JavaScript', 'HTML/CSS', 'SQL', 'Python', 'Java']
@@ -11,5 +11,7 @@ plt.pie(slices, explode=explode, shadow=True, labels=labels,
 
 plt.title("My Awesome Pie Chart")
 plt.tight_layout()
+
+plt.savefig('img/3.png', dpi=300)
 
 plt.show()
