@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.style.use("fivethirtyeight")	# ggplot
+plt.style.use("ggplot")	# ggplot
 
 ages_x = np.arange(25,36) 
 width = 0.25
@@ -36,5 +36,7 @@ plt.xlabel("Ages")
 plt.ylabel("Median Salaries")
 
 plt.tight_layout()
+
+plt.savefig('img/2_1.png', dpi=300)
 
 plt.show() 

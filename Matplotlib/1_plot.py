@@ -35,6 +35,6 @@ plt.legend()
 plt.tight_layout()
 # plt.grid(True)
 
-plt.savefig('1_1.png')
+plt.savefig('img/1.png', dpi=300)
 
 plt.show()
