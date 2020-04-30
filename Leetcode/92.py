@@ -7,7 +7,7 @@ class ListNode:
 
 
 class Solution:
-	def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
+	def reverseBetween(self, head: ListNode, m: int, n: int):
 		'''[summary]
 		
 		[description]
