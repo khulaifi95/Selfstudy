@@ -71,7 +71,6 @@ Define a discrete random variable $X$, which can take on any value from a finite
    p(X_{1:D})=p(X_1)p(X_2|X_1)p(X_3|X_1,X_2)...p(X_D|X_{1:D-1})
    $$
    
-   
 3. #### Conditional probability
 
    We define the conditional probability of event $A$, given that event $B$ is true, as follows:
@@ -120,7 +119,6 @@ $$
   &= \frac{0.8 \times 0.004}{0.8 \times 0.004 + 0.1 \times 0.996} = 0.031
   \end{align}
   $$
-  
   
 - #### Example II. generative classifiers
 
@@ -338,6 +336,7 @@ Cat(x|\theta)\triangleq Mu(x|1, \theta)
 $$
 
 
+
 #### 	**Table 2.2** Summary of the multinomial and related distributions
 
 | Name        | n    | K    | x                                                   |
@@ -346,4 +345,6 @@ $$
 | Multinoulli | 1    | -    | $\mathbf x \in \{0, 1\}^K, \sum_{k=1}^K x_k=1$      |
 | Binomial    | -    | 1    | $x \in \{0,1,...,n\}$                               |
 | Bernoulli   | 1    | 1    | $x \in \{0, 1\}$                                    |
+
+
 
