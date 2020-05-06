@@ -10,5 +10,7 @@ func main() {
 	for i, v := range pow {
 		fmt.Printf("2**%d = %d\n", i, v)
 	}
-	fmt.Printf((range))
+	for _, val := range pow {
+		fmt.Printf("%d\n", val)
+	}
 }
