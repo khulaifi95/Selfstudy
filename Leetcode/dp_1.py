@@ -28,8 +28,7 @@ def rec(arr, total, i):
     elif total < arr[i]:
         return rec(arr, total, i - 1)
     else:
-        return rec(arr, total - arr[i], i - 1) +
-            rec(arr, total, i - 1)
+        return rec(arr, total - arr[i], i - 1) + rec(arr, total, i - 1)
 
 
 # Memoisation

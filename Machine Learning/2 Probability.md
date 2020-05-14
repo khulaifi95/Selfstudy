@@ -54,23 +54,28 @@ Define a discrete random variable $X$, which can take on any value from a finite
    
 2. #### Joint probabilities
 
-   We define the probability of the joint event $A$ and $B$ as follows:
+   - We define the probability of the joint event $A$ and $B$ as follows:
+
    $$
    p(A, B) = p(A \and B) = p(A|B)p(B)
    $$
 
-   - AKA **product rule**. 
+   ​		AKA **product rule**. 
 
-   Given a **joint distribution** on two events $p(A,B)$, we define **marginal distribution** as follows:
+   - Given a **joint distribution** on two events $p(A,B)$, we define **marginal distribution** as
+
    $$
    p(A) = \sum\limits_b p(A,B) = \sum\limits_b p(A|B = b)p(B=b)
    $$
-   
-   The product rule can be applied multiple times to yield the **chain rule** of probability:
+
+   ​		AKA **sum rule**.
+
+   - The product rule can be applied multiple times to yield the **chain rule** of probability:
+
    $$
    p(X_{1:D})=p(X_1)p(X_2|X_1)p(X_3|X_1,X_2)...p(X_D|X_{1:D-1})
    $$
-   
+
 3. #### Conditional probability
 
    We define the conditional probability of event $A$, given that event $B$ is true, as follows:
@@ -153,7 +158,7 @@ $$
 
   - Intuitively, this is because $Z$ *causes* both $X$ and $Y$, so if we know $Z$, we don't need to know about $Y$ for predicting $X$ or vice versa.
 
-  - Another characterisation of CI is:
+  - $X\perp Y|Z $ iff there exist function $g$ and $h$ such that:
     $$
     p(x,y|z) = g(g,x)h(y,z)
     $$
@@ -321,6 +326,7 @@ $$
 {n \choose x_1, ...,x_K} \triangleq \frac {n!}{x_1!x_2!...x_K!}
 $$
 
+​		is the number of ways to divide a set of size $n=\sum_{k=1}^Kx_k$ into subsets with sizes $x_1$ to $x_K$.
 
 2. Suppose $n=1$, where only rolling the dice once, then $\mathbf x$ will be a vector of 0s and only a 1. We can think of $x$ as a scalar categorical random variable with $K$ states, and $\mathbf x$ is its **dummy encoding** or **one-hot encoding**, which is $\mathbf x = [\mathbb I(x=1), ..., \mathbb I(x=K)]$ of length $K$. In this case, the *pmf* becomes:
 
@@ -360,7 +366,7 @@ The Poisson distribution is often used as a model for **counts of rare events** 
 
 
 
-### 2.3.4 Empirical distribution
+### 2.3.4 Empirical measure
 
 Given a set of data $D = \{x_1, ..., x_N\}$, we define the empirical distribution/ measure as follows:
 $$
@@ -414,7 +420,7 @@ $$
 $$
 where $z = (x-\mu)/\sigma$ and:
 $$
-\text {erf}(x)\triangleq \frac 2 {\sqrt\pi} \int_0^x e_{-t^2}dt
+\text {erf}(x)\triangleq \frac 2 {\sqrt\pi} \int_0^x e^{-t^2}dt
 $$
 
 
@@ -535,7 +541,7 @@ Which is the distribution of the **sum of squared** Gaussian random variables. M
 - Additionally, if $X \sim Ga(a,b)$, then one can show that $\frac 1X \sim IG(a,b)$, where $IG$ is the **inverse gamma** distribution defined by:
 
 $$
-IG(x|shape = a, scale=b) \triangleq \frac {b^a}{\Tau(a)}x^{-(a+1)}e^{-b/x}
+IG(x|shape = a, scale=b) \triangleq \frac {b^a}{\Gamma(a)}x^{-(a+1)}e^{-b/x}
 $$
 
 
@@ -596,15 +602,100 @@ If the distribution is plotted on a log scale, it forms a straight line, of the 
 
 ## 2.5 Joint probability distributions
 
-In this section, we start our discussion of the more challenging problem of building joint probability distributions on multiple related random variables; this will be a central topic in this book.
+The problem of building joint probability distributions on multiple related random variables will be a central topic in this book.
 
 A **joint probability distribution** has the form $p(x_1,...,x_D)$ for a set of $D>1$ variables, and models the *stochastic* relationships between the variables.
 
 If all the variables are **discrete**, we can represent the joint distribution as a big multi-dimensional array, with one variable per dimension. However, the number of parameters needed to define such a model is $O(K^D)$, where K is the number of states for each variable.
 
-We can use fewer parameters to define high dimensional joint distributions by making conditional indepenence assumptions. In the case of continuous distributions, an alternative approach is to restrict the form of the pdf to certain functional forms, some of which we will examine below.
+We can use fewer parameters to define high dimensional joint distributions by making *conditional indepenence* assumptions. In the case of continuous distributions, an alternative approach is to restrict the form of the pdf to certain functional forms, some of which we will examine below.
 
 
 
 ### 2.5.1 Covariance and correlation
+
+The **covariance** between two random variables $X, \ Y$ measures the degree to which $X$ and $Y$ are (*linearly*) related. It is defined as
+$$
+cov[X,Y] \triangleq \mathbb E[(x-\mathbb E[X])(y-\mathbb E[Y])] = \mathbb E[XY] - \mathbb E[Y]\mathbb E[Y]
+$$
+
+1. If $\mathbf x$ is a $d$-dimensional random vector, then its **covariance matrix** is defined as the following *symmetric*, positive definite matrix:
+
+$$
+cov[\mathbf x] \triangleq \mathbb E[(\mathbf x- \mathbb E[\mathbf x])(\mathbf x - \mathbb E[\mathbf x])^T]
+\\ \ 
+\\ = \pmatrix {var[X_1], \ cov[X_1, X_2],\ ...,\ cov[X_1, X_d]
+\\ \
+\\ ... \ \ \ \ \ \ \ \ \ \ \ \ \ \ ... \ \ \ \ \ \ \ \ \ \ \ \ \ \ ... \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...
+\\ \
+\\ \ cov[X_d, X_1], \ cov[X_d, X_2],\ ..., \ var[X_d]}
+$$
+
+2. It is more convenient to work with a normalised measure, with a finite upper bound. The Pearson **correlation coefficient** between $X$ and $Y$ is defined as
+
+$$
+corr[X, Y] \triangleq \frac {cov[X,Y]}{\sqrt{var[X]var[Y]}}
+$$
+
+​		A **correlation matrix** has the form
+$$
+\mathbf R = \pmatrix {corr[X_1, X_1], \ corr[X_1, X_2], \ ..., \ corr[X_1, X_d]
+\\ \
+\\ ... \ \ \ \ \ \ \ \ \ \ \ \ \ \ ... \ \ \ \ \ \ \ \ \ \ \ \ \ \ ... \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...
+\\ \
+\\ corr[X_d, X_1], \ corr[X_d, X_2], \ ..., \ corr[X_d, X_d]
+}
+$$
+**Properties**:
+
+- $-1\leq corr[X,Y] \leq 1$, hence each entry in a correlation matrix on the diagonal is 1, while the others are between -1 and 1.
+- $corr[X,Y]=1$ *iff* $Y= aX+b$ for some parameters $a,b$. (linear)
+- The correlation coefficient can be better considered as a *degree of linearity*.
+
+- Independent pairs of variables have $corr[X,Y]=0$ , but **uncorrelated** does not imply **independent**.
+  - A more general measure: mutual information.
+
+
+
+### 2.5.2 The multivariate Gaussian
+
+The **multivariate Gaussian/ normal** is the most widely used joint probability density function for continuous variables. The *pdf* of a **MVN** in $D$ dimensions is defined by the following:
+$$
+\mathcal N(\mathbf x|\mu, \mathbf\Sigma) \triangleq \frac1{(2\pi)^{D/2}|\mathbf\Sigma|^{1/2}}\exp[-\frac12(x-\mu)^T\mathbf\Sigma^{-1}(x-\mu)]
+$$
+where $\mathbf\mu=\mathbb E[x] \in \mathbb R^D$ is the mean vector, $\mathbf\Sigma = cov[x]$ is the $D \times D$ covariance matrix. The normalisation constant ensures that the *pdf* integrates to 1. A **precision matrix** is the inverse covariance matrix: $\mathbf \Lambda=\mathbf\Sigma^{-1}$.
+
+- A full covariance matrix has $D(D+1)/2$ parameters.
+
+- A diagonal covariance matrix has $D$ parameters on the diagonal.
+- An **isotropic** covariance $\mathbf \Sigma=\sigma^2\mathbf I_D$ has one free parameter.
+
+
+
+|                  (a) Full MVN - elliptical                   |               (b) Diagonal MVN - axis aligned                |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="/Users/kevinxu95/Selfstudy/Machine Learning/2 Probability.assets/Screenshot 2020-05-14 at 07.45.58.png" style="zoom:50%;" /> | <img src="/Users/kevinxu95/Selfstudy/Machine Learning/2 Probability.assets/Screenshot 2020-05-14 at 07.46.05.png" style="zoom:50%;" /> |
+|                 (c) Isotropic MVN - circular                 |                    (d) 3d surface of (c)                     |
+| <img src="/Users/kevinxu95/Selfstudy/Machine Learning/2 Probability.assets/Screenshot 2020-05-14 at 07.46.19-9438851.png" style="zoom:50%;" /> | <img src="/Users/kevinxu95/Selfstudy/Machine Learning/2 Probability.assets/Screenshot 2020-05-14 at 07.46.27.png" style="zoom:50%;" /> |
+|                   **Fig 2.8** 2d Gaussians                   |                                                              |
+
+
+
+### 2.5.3 Multivariate Student t distribution
+
+A more robust alternative to the MVN is the **multivariate Student t** distribution, whose *pdf* is
+$$
+\mathcal T(\mathbf x|\mu, \mathbf \Sigma, v) = \frac{\Gamma(v/2+D/2)}{\Gamma(v/2)}|\pi\mathbf V|^{-1/2}\times[1+(\mathbf x - \mathbf\mu)^T\mathbf V^{-1}(\mathbf x-\mu)]^{-(\frac{v+D}{2})}
+$$
+where $\mathbf V=v\mathbf \Sigma$. It returns fatter tails than the Gaussian. 
+
+The smaller $v$ is, the fatter the tails. As $v \rightarrow \infty$, the distribution tends towards a Gaussian.
+
+- mean = $\mu$
+- mode = $\mu$
+- Cov = $\frac {v}{v-2}\mathbf\Sigma$
+
+
+
+### 2.5.4 Dirichlet distribution
 
