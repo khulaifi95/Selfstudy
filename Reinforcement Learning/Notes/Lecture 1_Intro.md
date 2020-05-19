@@ -1,7 +1,5 @@
 # Reinforcement Learning
 
----
-
 
 
 ## Lecture 1: Introduction
