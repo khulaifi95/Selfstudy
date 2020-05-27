@@ -4,7 +4,9 @@
 
 ## Lecture 2: Markov Decision Processes
 
-### 1. Introduction to MDPs
+### 1. Markov Process
+
+#### 1.1 Introduction to MDPs
 
 *Markov decision processes* formally describe an environment for RL.
 
@@ -17,7 +19,7 @@
 
 
 
-### 2. Markov property
+#### 1.2 Markov property
 
 > The future is independent of the past given the present.
 
@@ -32,7 +34,7 @@ $$
 
 
 
-### 3. State transition matrix
+#### 1.3 State transition matrix
 
 For a **Markov** state $s$ and successor state $s'$, the *state transition probability* is defined by:
 $$
@@ -46,7 +48,7 @@ where each row of the matrix sums to $1$, representing transition to all other s
 
 
 
-### 4. Markov process
+#### 1.4 Markov process
 
 A Markov process is a memoryless *random* process, i.e. a **sequence** of random states $S_1, S_2,...$ with the **Markov** property.
 
@@ -57,7 +59,9 @@ A Markov process/chain can be defined as a tuple $\left\langle \mathcal S, \math
 
 
 
-### 5. Markov reward process
+### 2. Markov reward process
+
+#### 2.1 MRP
 
 A Markov reward process is a Markov chain with values as a tuple $\left\langle \mathcal {S,P, R,\gamma} \right\rangle$.
 
@@ -72,7 +76,7 @@ A Markov reward process is a Markov chain with values as a tuple $\left\langle \
 
 
 
-### 6. Return
+#### 2.2 Return
 
 The return $G_t$ is the total **discounted** **reward** from time step $t$:
 $$
@@ -102,7 +106,7 @@ It is sometimes possible to use *undiscounted* Markov reward processes (i.e. $γ
 
 
 
-### 7. Value function
+#### 2.3 Value function
 
 The state value function $v(s)$ of an MRP is the long-term expected return starting from state $s$.
 $$
@@ -112,7 +116,7 @@ where the measured **expectation** indicate a stochasitic process.
 
 
 
-### 8. Bellman equation
+#### 2.4 Bellman equation for MRPs
 
 The value function can be decomposed into two parts:
 
@@ -135,7 +139,8 @@ v(s)=\mathcal R_s+\gamma \sum_{s'\in\mathcal S}\mathcal P_{ss'}v(s')
 $$
 
 
-### 9. Bellman equation in matrix form
+
+#### 2.5 Bellman equation in matrix form
 
 The Bellman equation can be expressed concisely using matrices:
 $$
@@ -147,7 +152,8 @@ $$
 $$
 
 
-### 10. Solving the Bellman equation
+
+#### 2.6 Solving the Bellman equation
 
 The Bellman equation is a linear equation and can be solved directly:
 $$
@@ -164,7 +170,9 @@ $$
 
 
 
-### 11. Markov decision process
+### 3. Markov decision process
+
+#### 3.1 MDP
 
 A Markov decision process is a Markov reward process with decisions. It is an environment in which all states are Markov. MDP is a tuple $\left\langle \mathcal {S,A,P, R,\gamma} \right\rangle$.
 
@@ -181,7 +189,7 @@ A Markov decision process is a Markov reward process with decisions. It is an en
 
 
 
-### 12. Policies
+#### 3.2 Policies
 
 A policy $\pi$ is a distribution over actions given states
 $$
@@ -203,14 +211,14 @@ $$
 $$
 
 $$
- \mathcal R_s^\pi = \sum_{a\in \mathcal A}\pi(a|s)\mathcal R_s^a
+\mathcal R_s^\pi = \sum_{a\in \mathcal A}\pi(a|s)\mathcal R_s^a
 $$
 
 
 
-### 13. Value function
+#### 3.3 Value function for MDP
 
-The *state-value* function $v_\pi(s)$ of an MDP is the expected return strating from state $s$, and **following policy** $\pi$
+The *state-value* function $v_\pi(s)$ of an MDP is the expected return starting from state $s$, and **following policy** $\pi$
 $$
 v_\pi(s)=\mathbb E_\pi[G_t|S_t=s]
 $$
@@ -220,7 +228,8 @@ q_\pi(s,a)=\mathbb E_\pi[G_t|S_t=s, A_t=a]
 $$
 
 
-### 14. Bellman expectation equation
+
+#### 3.4 Bellman expectation equation
 
 The state-value function can be decomposed into immediate reward and discounted value of successor state,
 $$
@@ -264,7 +273,8 @@ q_\pi(s,a)=\mathcal R_s^a+\gamma \sum_{s'\in \mathcal S}\mathcal P_{ss'}^a\sum_{
 $$
 
 
-### 15. Bellman expectation equation in matrix form
+
+#### 3.5 Bellman expectation equation in matrix form
 
 The Bellman expectation equation can be expressed concisely using the induced MRP
 $$
@@ -276,7 +286,8 @@ v_\pi = (I-\gamma \mathcal P^\pi)^{-1}\mathcal R^\pi
 $$
 
 
-### 16. Optimal value function
+
+#### 3.6 Optimal value function
 
 The optimal state-value function $v_*(s)$ is the maximum value function over all policies
 $$
@@ -298,7 +309,7 @@ $$
 
 
 
-### 17. Optimal policy
+#### 3.7 Optimal policy
 
 Define a partial ordering over policies
 $$
@@ -324,7 +335,7 @@ $$
 
 
 
-### 18. Finding an optimal policy
+#### 3.8 Finding an optimal policy
 
 An optimal policy can be found by maximising over $q_*(s,a)$,
 $$
@@ -336,7 +347,7 @@ $$
 
 
 
-### 19. Bellman optimality equation
+#### 3.9 Bellman optimality equation
 
 The optimal value functions are recursively related by the Bellman optimality equations:
 $$
@@ -364,7 +375,7 @@ $$
 
 
 
-### 20. Solving the Bellman optimality equation
+#### 3.10 Solving the Bellman optimality equation
 
 Bellman optimality equation is non-linear, in general, no closed form solution.
 
@@ -375,5 +386,100 @@ Bellman optimality equation is non-linear, in general, no closed form solution.
 
 
 
-### @Extensions to MDPs
+### 4. Extensions to MDPs
 
+#### 4.1 Infinite and continuous MDPs
+
+The following extensions are all possible:
+
+- Countably **infinite** state and/or action spaces 
+  - Straightforward
+
+- **Continuous** state and/or action spaces
+  - Closed form for linear quadratic model (LQR)
+
+- Continuous time
+  - Requires partial differential equations 
+  - Hamilton-Jacobi-Bellman (HJB) equation
+  - Limiting case of Bellman equation as time-step → 0
+
+
+
+#### 4.2 Partially observable MDPs
+
+##### 4.2.1 POMDP
+
+A *Partially Observable Markov Decision Process* is an MDP with hidden states. It is a hidden Markov model with actions.
+
+A *POMDP* is a tuple $\left\langle\mathcal {S, A, O, P, R, Z, \gamma}\right\rangle$:
+
+- $\mathcal S$: a finite set of states
+
+- $\mathcal A$: a finite set of actions
+- O: a finite set of **observations**
+- $\mathcal P$: a state transition probability matrix, $\mathcal P_{ss'}^a=\mathbb P[S_{t+1}=s'|S_t=s, A_t=a]$
+- $\mathcal R$: a reward function, $\mathcal R_s^a = \mathbb E[R_{t+1}|S_t =s, A_t=a]$
+- $\mathcal Z$: an **observation function**, $\mathcal Z_{s'o}^a = \mathbb P[O_{t+1} = o|S_{t+1}=s', A_t=a]$
+- $\gamma$: a discount factor, $\gamma \in [0,1]$
+
+##### 4.2.2 Belief states
+
+A history $H_t$ is a sequence of actions, observations and rewards
+$$
+H_t = A_0,O_1,R_1,...,A_{t−1},O_t,R_t
+$$
+A belief state $b(h)$ is a probability distribution over states, conditioned on the history $h$
+$$
+b(h)=(\mathbb P[􏰀S_t =s^1 |H_t =h]􏰁,...,\mathbb P[S_t =s^n |H_t =h])
+$$
+
+##### 4.2.3 Reduction of POMDPs
+
+If the history $H_t$ and the belief state $b(H_t)$ satisfies the Markov property:
+
+- A POMDP can be reduced to an (infinite) history tree.
+- A POMDP can be reduced to an (infinite) belief state tree.
+
+
+
+| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 2_MDP.assets/Screenshot 2020-05-25 at 11.03.14.png" style="zoom:50%;" /> |
+| :----------------------------------------------------------: |
+|    **Fig 2.7** POMDP reduced history tree and belief tree    |
+
+
+
+#### 4.3 Undiscounted average reward MDPs
+
+##### 4.3.1 Ergodic Markov process
+
+An ergodic Markov process is
+
+- Recurrent: each state is visited an infinite number of times.
+- Aperiodic: each state is visited without any systematic period.
+
+An ergodic Markov process has a **limiting stationary** distribution $d^π(s)$ with the property
+$$
+d^\pi(s) = \sum_{s'\in\mathcal S}d^\pi(s')\mathcal P_{s's}
+$$
+
+##### 4.3.2 Ergodic MDP
+
+An MDP is ergodic if the Markov chain induced by any policy is ergodic.
+
+For any policy $π$, an ergodic MDP has an *average reward per time-step* $ρπ$ that is independent of start state
+$$
+ρ^\pi=\lim_{T\rightarrow\infty} \frac 1T \mathbb E[\sum_{t=1}^TR_t]
+$$
+
+##### 4.3.3 Average reward value function
+
+The value function of an undiscounted, ergodic MDP can be expressed in terms of average reward.
+
+$\tilde v_\pi(s)$ is the **extra reward** due to starting from state $s$:
+$$
+\tilde v_\pi(s) = \mathbb E_\pi[\sum_{k=1}^\infty(R_{t+k}-ρ^\pi)|S_t =s]
+$$
+There is a corresponding average reward **Bellman equation**:
+$$
+\tilde v_\pi(s) = \mathbb E_\pi[(R_{t+1}-ρ^\pi)+\sum_{k=1}^\infty(R_{t+k+1}-ρ^\pi)|S_t =s]\\= \mathbb E_\pi[\sum_{k=1}^\infty(R_{t+k}-ρ^\pi)+\tilde v_\pi(S_{t+1})|S_t =s]
+$$
