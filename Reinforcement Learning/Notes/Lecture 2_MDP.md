@@ -203,7 +203,7 @@ $$
 Given an *MDP* $\mathcal {M=\left\langle S,A,P,R,\gamma\right\rangle}$ and a policy $\pi$, 
 
 - the state sequence $S_1,S_2,...$ is a **Markov process** $\mathcal {\left\langle S,P^\pi \right\rangle}$.
-- the state and reward sequence $S_1, R_2, S_2,...$ is a **Markov reward process** $\mathcal {\left\langle S,P^\pi \right\rangle}, R^\pi, \gamma$.
+- the state and reward sequence $S_1, R_2, S_2,...$ is a **Markov reward process** $\mathcal {\left\langle S,P^\pi , R^\pi, \gamma\right\rangle}$.
 - where transition dynamics and the value function averaged over the policy.
 
 $$
