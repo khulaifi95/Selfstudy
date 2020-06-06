@@ -193,7 +193,7 @@ q_\pi(s, \pi'(s)) = \max_{a\in\mathcal A}q_\pi(s,a)\geq q_\pi(s,\pi(s)) = v_\pi(
 $$
 where $q_\pi(s,\pi'(s))$ means take one step greedily followed by the policy $\pi$ after.
 
-It therefore improves the value function, $v_\pi'(s)\geq v_\pi(s)$:
+It therefore improves the value function, $v_{\pi'}(s)\geq v_\pi(s)$:
 $$
 \begin{align}
 v_\pi(s) &\leq q_\pi(s,\pi'(s)) =\mathbb E_{\pi'}[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s] \\ &\leq \mathbb E_{\pi'}[R_{t+1}+\gamma q_\pi(S_{t+1},\pi'(S_{t+1}))|S_t=s] \\ &\leq \mathbb E_{\pi'}[R_{t+1}+ \gamma R_{t+2}+\gamma^2q_\pi(S_{t+2}, \pi'(S_{t+2}))|S_t=s]  \\ &\leq \mathbb E_{\pi'}[R_{t+1}+\gamma R_{t+2}+...|S_t=s]=v_{\pi'}(s)
