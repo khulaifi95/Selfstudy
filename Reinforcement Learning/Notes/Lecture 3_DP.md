@@ -4,6 +4,8 @@
 
 ## Lecture 3: Planning by Dynamic Programming
 
+
+
 ### 1. Introduction
 
 #### 1.1 What is dynamic programming?
