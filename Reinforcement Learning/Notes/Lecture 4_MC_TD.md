@@ -10,7 +10,7 @@
 
 #### 1.1 MC reinforcement learning
 
-MC methods learn directly from episodes of experience.
+MC methods learn directly from **episodes** of experience.
 
 - Model-free: no knowledge of MDP transitions & rewards.
 - No bootstrpping: learn from *complete* episodes.
@@ -77,7 +77,7 @@ The mean $\mu_1, \mu_2,...$ of a sequence $x_1,x_2,...$ can be computed incremen
 $$
 \begin{align}\mu_k&=\frac1k\sum_{j=1}^kx_j\\&=\frac1k(x_k+\sum_{j=1}^{k-1}x_j)\\&=\frac1k(x_k+(k-1)\mu_{k-1})\\&=\mu_{k-1}+\frac1k(x_k-\mu_{k-1}) \end{align}
 $$
-where the second part is an *error* in the estimate, which is reduced by taking step *k*.
+where the second part is an **error** in the estimate, which is reduced by taking step *k*.
 
 Analogy to the incremental mean method, we update $V(s)$ incrementally after episode $S_1, A_1,R_2,...,S_T$.
 
@@ -102,7 +102,7 @@ $$
 TD methods learn directly from episodes of experience.
 
 - Model-free: no knowledge of MDP transitions & rewards.
-- Bootstrapping: learn from *incomplete* episodes.
+- **Bootstrapping**: learn from *incomplete* episodes.
 - Idea: update a guess towards a guess.
 
 
@@ -145,7 +145,7 @@ The changes recommended by MC and TD ($\alpha=1$) are illustrated below:
 
 
 
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 12.30.24.png" style="zoom:66%;" /> | <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 12.30.14.png" style="zoom:66%;" /> |
+| <img src="Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 12.30.24.png" style="zoom:66%;" /> | <img src="Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 12.30.14.png" style="zoom:66%;" /> |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                 **Fig 4.1** Driving home MC                  |                       Driving home TD                        |
 
@@ -173,7 +173,7 @@ TD can learn ***without*** the final outcome.
 - True TD target $R_{t+1}+\gamma v_\pi(S_{t+1})$ is *unbiased* estimate of $v_\pi(S_t)$.
 - TD target $R_{t+1}+\gamma V(S_{t+1})$ is **biased** estimate of $v_\pi(S_t)$.
 
-Thus TD target has much lower variance than the return:
+Thus TD target has much **lower variance** than the return:
 
 - Return depends on *many* random actions, transitions, rewards.
 - TD target depends on **one** random action, transition and reward.
@@ -247,10 +247,10 @@ MC does not exploit Markov property.
 |                          MC backup                           |                          TD backup                           |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |           $V(S_t)\larr V(S_t) +\alpha(G_t-V(S_t))$           | $V(S_t)\larr V(S_t)+\alpha (R_{t+1}+\gamma V(S_{t+1})-V(S_t))$ |
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 13.10.33.png" style="zoom:33%;" /> | <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 13.10.51.png" style="zoom:33%;" /> |
+| <img src="Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 13.10.33.png" style="zoom:33%;" /> | <img src="Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 13.10.51.png" style="zoom:33%;" /> |
 |                        **DP backup**                         |                       **Unified view**                       |
 |    $V(S_t)\larr \mathbb E_\pi[R_{t+1}+\gamma V(S_{t+1})]$    |                  Bootstrapping and sampling                  |
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 13.10.55-2914525.png" style="zoom:33%;" /> | <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 13.16.30.png" style="zoom:33%;" /> |
+| <img src="Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 13.10.55-2914525.png" style="zoom:33%;" /> | <img src="Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 13.16.30.png" style="zoom:33%;" /> |
 |        **Fig 4.2** Unified view of policy evaluation         |                                                              |
 
 
@@ -261,7 +261,7 @@ MC does not exploit Markov property.
 
 We can let TD target look *n* steps into the future.
 
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 13.32.50.png" style="zoom:67%;" /> |
+| <img src="Lecture 4_MC_TD.assets/Screenshot 2020-06-23 at 13.32.50.png" style="zoom:67%;" /> |
 | :----------------------------------------------------------: |
 |                    **Fig 4.3** n-step TD                     |
 
@@ -334,7 +334,7 @@ Credit assignment problem: Did bell or light cause shock?
 - **Frequency** heuristic: Assign credit to most frequent states.
 - **Recency** heuristic: Assign credit to most recent states.
 
-Eligibility traces combine both  heuristics:
+Eligibility traces combine both heuristics:
 $$
 \begin{align} E_0(s) &=0 \\ E_t(s) &=\gamma\lambda E_{t-1}(s)+\mathbf 1(S_t=s) \end{align}
 $$
@@ -379,6 +379,7 @@ The sum of offline/ online updates is identical for forward-view and backward-vi
 $$
 \sum_{t=1}^T\alpha\delta_tE_t(s)=\sum_{t=1}^T\alpha(G_t^\lambda-V(S_t))\mathbf 1(S_t=s)
 $$
+
 
 
 #### 3.7 Summary of forward and backward TD($\lambda$)

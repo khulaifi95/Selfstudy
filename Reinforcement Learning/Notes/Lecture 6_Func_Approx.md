@@ -47,8 +47,8 @@ $$
 
 #### 1.3 Type of function approximators
 
-| <img src="Lecture 6_Func_Approx.assets/Screenshot 2020-06-26 at 08.57.20-3158306.png" style="zoom:67%;" /> | <img src="Lecture 6_Func_Approx.assets/Screenshot 2020-06-26 at 08.57.24.png" style="zoom:67%;" /> | <img src="Lecture 6_Func_Approx.assets/Screenshot 2020-06-26 at 08.57.30.png" style="zoom:67%;" /> |
-| ------------------------------------------------------------ | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="Lecture 6_Func_Approx.assets/Screenshot 2020-06-26 at 08.57.20-3158306.png" style="zoom:60%;" /> | <img src="Lecture 6_Func_Approx.assets/Screenshot 2020-06-26 at 08.57.24.png" style="zoom:60%;" /> | <img src="Lecture 6_Func_Approx.assets/Screenshot 2020-06-26 at 08.57.30.png" style="zoom:60%;" /> |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                                                              |                  **Fig 6.1** 3 types of FA                   |                                                              |
 
 
@@ -105,7 +105,7 @@ $$
 \Delta \mathbf w = \alpha(v_\pi(S)-\hat v(S,\mathbf w))\nabla_\mathbf w\hat v(S,\mathbf w)
 $$
 
-​		where the expected update is equal to full gradient update.
+​		where the **expected** update is equal to full gradient update.
 
 
 
@@ -153,13 +153,15 @@ $$
 
 
 
-#### 2.5 Incremental prediction algorithms
+### 3. Incremental prediction
+
+#### 3.1 Incremental prediction algorithms
 
 In the above sections, we have assumed true value function $v_\pi(s)$ given by supervisor.
 
 - In RL, there is no supervisor, only rewards.
 
-In practice, we substitude a **target** for $v_\pi(s)$.
+In practice, we substitute a **target** for $v_\pi(s)$.
 
 - For MC, the target is the return $G_t$
 
@@ -181,7 +183,7 @@ $$
 
 
 
-#### 2.6 Monte-Carlo with value function approximation
+#### 3.2 Monte-Carlo with value function approximation
 
 The return $G_t$ is an **unbiased**, **noisy** sample of true value $v_\pi(S_t)$.
 
@@ -202,7 +204,7 @@ $$
 
 
 
-#### 2.7 TD learning with value function approximation
+#### 3.3 TD learning with value function approximation
 
 The TD target $R_{t+1}+\gamma \hat v(S_{t+1}, \mathbf w)$ is a **biased** sample of true value $v_\pi(S_t)$.
 
@@ -222,7 +224,7 @@ $$
 
 
 
-#### 2.8 TD($\lambda$) with value function approximation
+#### 3.4 TD($\lambda$) with value function approximation
 
 The $\lambda$-return $G_t^\lambda$ is also a **biased** sample of true value $v_\pi(s)$.
 
@@ -244,11 +246,30 @@ $$
 \begin{align}\delta_t&=R_{t+1}+\gamma\hat v(S_{t+1}, \mathbf w)-\hat v(S_t, \mathbf w) \\ E_t&=\gamma \lambda E_{t-1}+\mathbf x(S_t) \\ \Delta\mathbf w&= \alpha\delta_tE_t \end{align}
 $$
 
-Forward and backward view linear TD($\lambda$) are equivalent.
+Forward and backward view linear TD($\lambda$) are **equivalent**.
 
 
 
-#### 2.9 Control with value function approximation
+#### 3.5 Convergence of prediction algorithms
+
+- TD does not follow the gradient of **any** objective function.
+- That is the reason why TD can diverge when off-policy or using non-linear approximators.
+- **Gradient TD** follows true gradient of projected Bellman error.
+
+| On/off-policy  |  Algorithm  | Table lookup |    Linear    |  Non-linear  |
+| :------------: | :---------: | :----------: | :----------: | :----------: |
+|                |     MC      | $\checkmark$ | $\checkmark$ | $\checkmark$ |
+| **On-policy**  |     TD      | $\checkmark$ | $\checkmark$ |   $\times$   |
+|                | Gradient TD | $\checkmark$ | $\checkmark$ | $\checkmark$ |
+|                |     MC      | $\checkmark$ | $\checkmark$ | $\checkmark$ |
+| **Off-policy** |     TD      | $\checkmark$ |   $\times$   |   $\times$   |
+|                | Gradient TD | $\checkmark$ | $\checkmark$ | $\checkmark$ |
+
+
+
+### 4. Incremental control
+
+#### 4.1 Control with value function approximation
 
 | <img src="Lecture 6_Func_Approx.assets/Screenshot 2020-06-26 at 10.49.05.png" style="zoom:67%;" /> |
 | :----------------------------------------------------------: |
@@ -261,7 +282,7 @@ From general policy iteration,
 
 
 
-#### 2.10 Aciton-value function approximation
+#### 4.2 Aciton-value function approximation
 
 We can also approximate the action-value function
 $$
@@ -282,7 +303,7 @@ $$
 
 
 
-#### 2.11 Linear action-value function approximation
+#### 4.3 Linear action-value function approximation
 
 - We represent **state and action** by a feature vector
 
@@ -304,7 +325,7 @@ $$
 
 
 
-#### 2.12 Incremental control algorithms
+#### 4.4 Incremental control algorithms
 
 Like prediction, we must substitute a **target** for $q_\pi(S,A)$.
 
@@ -334,40 +355,17 @@ $$
 
 
 
-#### 2.13 Study of $\lambda$: should we bootstrap?
+#### 4.5 Study of $\lambda$: should we bootstrap?
 
-
+Empirically, tests across different environments show that there is often a sweet spot of $\lambda=0.9$ between TD and MC methods.
 
 | <img src="Lecture 6_Func_Approx.assets/Screenshot 2020-06-26 at 11.17.22.png" style="zoom:67%;" /> |
 | :----------------------------------------------------------: |
 |          **Fig 6.3** Sweet spots between MC and TD           |
 
-Empirically, tests across different environments show that there is often a sweet spot of $\lambda=0.9$ between TD and MC methods.
 
 
-
-#### 2.14 Convergence of prediction algorithms
-
-- TD does not follow the gradient of **any** objective function.
-- That is the reason why TD can diverge when off-policy or using non-linear approximators.
-- **Gradient TD** follows true gradient of projected Bellman error.
-
-
-
-| On/off-policy  |  Algorithm  | Table lookup |    Linear    |  Non-linear  |
-| :------------: | :---------: | :----------: | :----------: | :----------: |
-|                |     MC      | $\checkmark$ | $\checkmark$ |   $\times$   |
-| **On-policy**  |     TD      | $\checkmark$ | $\checkmark$ |   $\times$   |
-|                | Gradient TD | $\checkmark$ | $\checkmark$ | $\checkmark$ |
-|                |     MC      | $\checkmark$ | $\checkmark$ | $\checkmark$ |
-| **Off-policy** |     TD      | $\checkmark$ |   $\times$   |   $\times$   |
-|                | Gradient TD | $\checkmark$ | $\checkmark$ | $\checkmark$ |
-
-
-
-#### 2.15 Convergence of control algorithms
-
-
+#### 4.6 Convergence of control algorithms
 
 | Algorithm           | Table lookup |     Linear     | Non-linear |
 | :------------------ | :----------: | :------------: | :--------: |
@@ -380,14 +378,14 @@ where $(\checkmark)$ means the result chatters around near-optimal value functio
 
 
 
-### 3. Batch methods
+### 5. Batch methods
 
 - Gradient descent is simple and appealing but it is not **sample efficient**.
 - Batch methods seek to find the best fitting value function given the agent's **experience**.
 
 
 
-#### 3.1 Least squares prediction
+#### 5.1 Least squares prediction
 
 - Given value function approximation $\hat v(s,\mathbf w)\approx v_\pi(s)$.
 
@@ -397,13 +395,14 @@ $$
 \mathcal D = \{\left\langle s_1,v_1^\pi\right\rangle, \left\langle s_2,v_2^\pi\right\rangle, ..., \left\langle s_T,v_T^\pi\right\rangle\}
 $$
 
-**Least squares** algorithms find parameter vector $\mathbf w$ minimising sum-squared error between $\hat v(s_t, \mathbf w)$ and target values $v_t^\pi$:
+**Least squares** algorithms find parameters $\mathbf w$ minimising sum-squared error between $\hat v(s_t, \mathbf w)$ and target values $v_t^\pi$:
 $$
 LS(\mathbf w) = \sum_{t=1}^T(v_t^\pi-\hat v(s_t,\mathbf w))^2 \\ = \mathbb E_\mathcal D[(v^\pi - \hat v(s,\mathbf w))^2]
 $$
 
 
-#### 3.2 SGD with experience replay
+
+#### 5.2 SGD with experience replay
 
 We can utilise the agent's experience of past states to find least squares solution.
 
@@ -433,7 +432,8 @@ $$
 $$
 
 
-#### 3.3 Experience replay in DQN
+
+#### 5.3 Experience replay in DQN
 
 Deek Q-Networks use experience replay and **fixed Q-targets**.
 
@@ -451,10 +451,10 @@ $$
 
 
 
-#### 3.4 DQN in Atari game
+#### 5.4 DQN in Atari game
 
 - End-to-end learning of values $Q(s,a)$ from pixels *s*.
-- **Input** state *s* is tack of raw pixels from last 4 frames.
+- **Input** state *s* is stack of raw pixels from last 4 frames.
 - **Output** is $Q(s,a)$ for 18 joystick/ button positions.
 - **Reward** is change in score for that step.
 
@@ -462,15 +462,13 @@ Note: Network architecture and hyperparameters are fixed across all games.
 
 It shows that experience replay with fixed Q target gives the best result.
 
-
-
 | <img src="Lecture 6_Func_Approx.assets/Screenshot 2020-06-27 at 20.01.08.png" style="zoom:67%;" /> |
 | :----------------------------------------------------------: |
 |       **Fig 6.4** Network architecture of DQN in Atari       |
 
 
 
-#### 3.5 Linear least squares prediction
+#### 5.5 Linear least squares prediction
 
 - Experience replay finds least squares solution, but it may take many iterations.
 - Using **linear** value function approximation, we can solve the least squares solution directly.
@@ -490,7 +488,7 @@ $$
 
 
 
-#### 3.6 Linear least squares prediction algorithms
+#### 5.6 Linear least squares prediction algorithms
 
 In practice, we do not know true values $v_t^\pi$. The *training data* must use noisy or biased samples of $v_t^\pi$.
 
@@ -518,7 +516,7 @@ $$
 
 
 
-#### 3.7 Least squares policy iteration
+#### 5.7 Least squares policy iteration
 
 | <img src="Lecture 6_Func_Approx.assets/Screenshot 2020-06-27 at 20.19.57.png" style="zoom:67%;" /> |
 | :----------------------------------------------------------: |
@@ -529,7 +527,7 @@ $$
 
 
 
-#### 3.8 Least squares control
+#### 5.8 Least squares control
 
 To evaluate $q_\pi(S,A)$, we must learn **off-policy**.
 
@@ -545,25 +543,29 @@ We use the same idea as Q-learning:
 
 
 
-#### 3.9 Least squares policy iteration algorithm
+#### 5.9 Least squares policy iteration algorithm
 
 - Least squares Q-learning algorithm (LSTDQ) solves for total update equals  to zero.
+- Least squares policy iteration algorithm re-evaluated experience $\mathcal D$ with **different policies**.
+- LSPI converges to **near-optimal** value function.
 
-- Least squares policy iteration algorithm re-evaluated experience $\mathcal D$ with different policies.
+**LSPI-TD($\mathcal D, \pi_0$)**:
+
+> $\pi'\larr \pi_0$
+>
+> **Repeat**
+>
+> ​		$\pi \larr \pi'$
+>
+> ​		$Q\larr LSTDQ(\pi,\mathcal D)$
+>
+> ​		**for all** $s\in\mathcal S$ **do**
+>
+> ​				$\pi'(s)\larr \arg\max\limits_{a\in \mathcal A}Q(s,a)$
+>
+> ​		**end for**
+>
+> **Until** ($\pi\approx \pi'$)
 
 
 
-| function LSPI-TD($\mathcal D, \pi_0$):                 |
-| ------------------------------------------------------ |
-| $\pi'\larr \pi_0$                                      |
-| **Repeat**                                             |
-| $\pi \larr \pi'$                                       |
-| $Q\larr LSTDQ(\pi,\mathcal D)$                         |
-| **for all** $s\in\mathcal S$ **do**                    |
-| $\pi'(s)\larr \arg\max\limits_{a\in \mathcal A}Q(s,a)$ |
-| **end for**                                            |
-| **until** ($\pi\approx \pi'$)                          |
-| **return** $\pi$                                       |
-| **end**                                                |
-
-LSPI converges to near-optimal value function.

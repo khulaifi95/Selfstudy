@@ -11,7 +11,7 @@
 Q: What makes RL different from other ML problems?
 
 - No supervisor, only a ***reward*** signal.
-- Delayed **feedback**, not instantaneous.
+- **Delayed** feedback, not instantaneous.
 - **Time** really matters, i.e. sequential, non i.i.d data.
 - **Agent's** actions affect the data it receives.
 
@@ -27,7 +27,9 @@ The agent's job is to **maximise** cumulative reward, based on the *reward hypot
 
 > All goals can be described by the maximisation of expected cumulative reward.
 
-##### Examples(+/-):
+
+
+**Example**:
 
 - fly as desired / crash
 - winning / losing a game
@@ -65,7 +67,7 @@ The agent's job is to **maximise** cumulative reward, based on the *reward hypot
 
 
 
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.13.54-9253295.png" alt="Screenshot 2020-05-12 at 04.13.54" style="zoom:50%;" /> |
+| <img src="Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.13.54-9253295.png" alt="Screenshot 2020-05-12 at 04.13.54" style="zoom:50%;" /> |
 | :----------------------------------------------------------: |
 | **Fig 1.1** Interaction between the environment and the agent |
 
@@ -97,9 +99,9 @@ $$
 
 The environment state $S_t^e$ is the environment's *private* representation.
 
-- the data the environment uses to pick the next observation/ reward
-- usually **invisible** to the agent
-- may contain **irrelevant** information if visible
+- The data the environment used to pick the next observation/ reward.
+- Usually **invisible** to the agent.
+- May contain **irrelevant** information if visible.
 
 
 
@@ -107,8 +109,8 @@ The environment state $S_t^e$ is the environment's *private* representation.
 
 The agent state $S_t^a$ is the agent's internal representation.
 
-- the information the agent uses to pick the next action
-- the data used by RL algorithms
+- The information the agent uses to pick the next action.
+- The data used by RL algorithms.
 - can be any function of history:
 
 $$
@@ -135,14 +137,14 @@ $$
 - Once the *state* is known, the *history* may be thrown away.
 - The *state* is a **sufficient** statistic of the future.
 
-##### Example:
+**Example**:
 
 - The environment state $S_t^e$ is Markov.
 - The history $H_t$ is Markov.
 
 
 
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.12.20.png" alt="Screenshot 2020-05-12 at 04.12.20" style="zoom:50%;" /> |
+| <img src="Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.12.20.png" alt="Screenshot 2020-05-12 at 04.12.20" style="zoom:50%;" /> |
 | :----------------------------------------------------------: |
 |                  **Fig 1.2** Rat experiment                  |
 
@@ -169,9 +171,9 @@ This is a Markov decision process (**MDP**).
 
 Agent constructs its own state representation $S_t^a$ with:
 
-- complete history: $S_t^a=H_t$
-- **beliefs** of environment state: $S_t^a=(\mathbb P[S_t^e=s^1],...,\mathbb P[S^e_t=s^n])$
-- RNN: $S_t^a=\sigma(S_{t-1}^aW_s+O_tW_0)$ as linear combination
+- Complete history: $S_t^a=H_t$.
+- **Beliefs** of environment state: $S_t^a=(\mathbb P[S_t^e=s^1],...,\mathbb P[S^e_t=s^n])$.
+- RNN: $S_t^a=\sigma(S_{t-1}^aW_s+O_tW_0)$ as linear combination.
 
 
 
@@ -181,9 +183,9 @@ Agent constructs its own state representation $S_t^a$ with:
 
 An RL agent may include one or more of these components:
 
-- Policy: agent's *behaviour* function
-- Value function: how good is each state and / or action
-- Model: agent's representation of the environment
+- Policy: agent's *behaviour* function.
+- Value function: how good is each state and / or action.
+- Model: agent's representation of the environment.
 
 
 
@@ -191,8 +193,8 @@ An RL agent may include one or more of these components:
 
 A policy is the agent's behaviour which is a **map** from state to action.
 
-- deterministic policy: $a=\pi(s)$
-- stochastic policy: $\pi(a|s) = \mathbb P[A=a|S=s]$
+- deterministic policy: $\pi(s)=a$.
+- stochastic policy: $\pi(a|s) = \mathbb P[A=a|S=s]$.
 
 
 
@@ -212,7 +214,7 @@ $$
 
 A model predicts what the environment will do next.
 
-- Transitions: $\mathcal P$ predicts the next state (i.e. dynamics).
+- Transitions: $\mathcal P$ predicts the next state i.e. **dynamics**.
 - Rewards: $\mathcal R$ predicts the next immediate reward.
 
 $$
@@ -226,10 +228,10 @@ $$
 
 
 
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.43.45.png" style="zoom:35%;" /> | <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.43.58.png" style="zoom:25%;" /> |
+| <img src="Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.43.45.png" style="zoom:35%;" /> | <img src="Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.43.58.png" style="zoom:25%;" /> |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |      Reward: -1/step, Actions: N/E/S/W, State: location      |              Policy $\pi(s)$ for each state $s$              |
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.44.08.png" style="zoom:25%;" /> | <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.44.20.png" style="zoom:30%;" /> |
+| <img src="Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.44.08.png" style="zoom:25%;" /> | <img src="Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.44.20.png" style="zoom:30%;" /> |
 |              Value $v_\pi(s)$ of each state $s$              | Model of transition $\mathcal P^a_{SS'}$ and next reward $\mathcal R^a_S$ |
 |                       **Fig 1.3** Maze                       |                                                              |
 
@@ -266,26 +268,26 @@ $$
 
 
 
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.58.03.png" style="zoom:50%;" /> |
+| <img src="Lecture 1_Intro.assets/Screenshot 2020-05-12 at 04.58.03.png" style="zoom:50%;" /> |
 | :----------------------------------------------------------: |
 |                **Fig 1.4** RL agent taxonomy                 |
 
 
 
-### 4. Problems within RL
+### 4. Basic problems within RL
 
-#### 4.1 Learning as planning
+#### 4.1 Learning and planning
 
 Two fundamental problems in sequential decision making.
 
 - Learning:
-  - environment initially **unknown**
-  - agent interacts with environment
-  - agent improves its policy
+  - Environment initially **unknown**.
+  - Agent interacts with environment.
+  - Agent improves its policy.
 - Planning:
-  - model of the environment **known**
-  - agent performs computations with its model
-  - agent improves its policy
+  - Model of the environment **known**.
+  - Agent performs computations with its model.
+  - Agent improves its policy.
 
 
 

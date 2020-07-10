@@ -256,17 +256,25 @@ $$
 \nabla_\theta J(\theta) = \mathbb E_{\pi_\theta}[\nabla_\theta\log\pi_\theta(s,a)Q^{\pi_\theta}(s,a)]
 $$
 
+
+
 #### 3.4 Monte-Carlo policy gradient
 
-| REINFORCE                                                    |
-| ------------------------------------------------------------ |
-| **Initialise** $\theta$ arbitrarily                          |
-| **For** each episode $\{s_1,a_1,r_2,...,s_{T-1},a_{T-1},r_{T}\} \sim \pi_\theta$ do |
-| **For** $t=1 \to T-1$ do                                     |
-| $\theta \larr \theta+\alpha\nabla_\theta\log\pi_\theta(s_t,a_t)v_t$ |
-| **End for**                                                  |
-| **End for**                                                  |
-| **End**                                                      |
+**REINFORCE Algorithm**:
+
+> **Initialise** $\theta$ arbitrarily
+>
+> **For** each episode $\{s_1,a_1,r_2,...,s_{T-1},a_{T-1},r_{T}\} \sim \pi_\theta$ do
+>
+> ​		**For** $t=1 \to T-1$ do
+>
+> ​				$\theta \larr \theta+\alpha\nabla_\theta\log\pi_\theta(s_t,a_t)v_t$
+>
+> ​		**End for**
+>
+> **End for**
+>
+> **End**
 
 - Update parameters by stochastic gradient descent.
 - Use policy gradient theorem.
@@ -293,6 +301,7 @@ $$
 $$
 
 
+
 #### 4.2 Estimating the action-value function
 
 The critic is solving a familiar problem of policy evaluation.
@@ -309,26 +318,34 @@ Solutions were explored in previous lectures, e.g.:
 
 **QAC** is a simple Actor-Critic algorithm based on action-value critic.
 
-It uses linear value function approximation: $Q_w(s,a)=\phi(s,a)^Tw$.
+It uses **linear** value function approximation: $Q_w(s,a)=\phi(s,a)^Tw$.
 
 - **Critic**: Updates $w$ by linear TD(0).
 - **Actor**: Updates $\theta$ by policy gradient.
 
+**QAC Algorithm**:
 
-
-| QAC                                                          |
-| ------------------------------------------------------------ |
-| **Initialise** $s,\theta$                                    |
-| Sample $a\sim \pi_\theta$                                    |
-| **For** each step do                                         |
-| Sample reward $r=\mathcal R_s^a$; sample transition $s'\sim \mathcal P_s^a$ |
-| Sample action $a'\sim\pi_\theta(s',a')$                      |
-| $\delta = r+\gamma Q_w(s',a')-Q_w(s,a)$                      |
-| $\theta = \theta +\alpha\nabla_\theta\log\pi_\theta(s,a)Q_w(s,a)$ |
-| $w\larr w+\beta\delta\phi(s,a)$                              |
-| $a\larr a', s\larr s'$                                       |
-| **End for**                                                  |
-| **End**                                                      |
+> **Initialise** $s,\theta$
+>
+> Sample $a\sim \pi_\theta$
+>
+> **For** each step do
+>
+> ​		Sample reward $r=\mathcal R_s^a$; sample transition $s'\sim \mathcal P_s^a$
+>
+> ​		Sample action $a'\sim\pi_\theta(s',a')$
+>
+> ​		$\delta = r+\gamma Q_w(s',a')-Q_w(s,a)$
+>
+> ​		$\theta = \theta +\alpha\nabla_\theta\log\pi_\theta(s,a)Q_w(s,a)$
+>
+> ​		$w\larr w+\beta\delta\phi(s,a)$
+>
+> ​		$a\larr a', s\larr s'$
+>
+> **End for**
+>
+> **End**
 
 
 

@@ -10,14 +10,14 @@
 
 #### 1.1 What is dynamic programming?
 
-*Dynamic*: sequential or temporal component to the problem.
+- *Dynamic*: sequential or temporal component to the problem.
 
-*Programming*: optimising a *program* i.e. policy.
+- *Programming*: optimising a *program* i.e. policy.
 
 Dynamic programming is a method for solving complex problems by breaking them down into subproblems.
 
-1. Solve the subproblems
-2. Combine solutions to subproblems
+1. Solve the subproblems.
+2. Combine solutions to subproblems.
 
 
 
@@ -26,29 +26,29 @@ Dynamic programming is a method for solving complex problems by breaking them do
 Dynamic Programming is a very general solution method for problems which have two properties:
 
 1. Optimal substructure
-   - principle of optimality applies
-   - optimal solution can be decomposed into subproblems
+   - Principle of **optimality** applies.
+   - Optimal solution can be **decomposed** into subproblems.
 2. Overlapping subproblems
-   - recur many times
-   - cached and reused
+   - Recur many times.
+   - **Cached** and reused.
 
 MDPs satisfy both properties by:
 
-- Bellman equation $\rightarrow$ recursive decomposition
-- Value function $\rightarrow$ stores and reuses solutions
+- Bellman equation $\rightarrow$ recursive decomposition.
+- Value function $\rightarrow$ stores and reuses solutions.
 
 
 
 #### 1.3 Planning by DP
 
-Dynamic programming assumes full knowledge of the MDP. It is used for planning in an MDP.
+Dynamic programming assumes full knowledge of the MDP. It is used for **planning** in an MDP.
 
 - For prediction:
-  - Input: MDP $\left\langle \mathcal {S,A, P, R,\gamma} \right\rangle$ and policy $\pi$ **or** MRP $\left\langle \mathcal {S,P, R,\gamma} \right\rangle$
-  - Output: value function $v_\pi$
+  - Input: MDP $\left\langle \mathcal {S,A, P, R,\gamma} \right\rangle$ and policy $\pi$ **or** MRP $\left\langle \mathcal {S,P, R,\gamma} \right\rangle$.
+  - Output: value function $v_\pi$.
 - For control:
-  - Input: MDP $\left\langle \mathcal {S,A, P, R,\gamma} \right\rangle$
-  - Output: optimal value function $v_*$ **and** optimal policy $\pi_*$
+  - Input: MDP $\left\langle \mathcal {S,A, P, R,\gamma} \right\rangle$.
+  - Output: optimal value function $v_*$ **and** optimal policy $\pi_*$.
 
 
 
@@ -99,7 +99,7 @@ Thus we can update the value functions of all states in iterations.
 
 #### 2.2 Evaluating a random policy in the grid world
 
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.32.05.png" style="zoom:100%;" /> |
+| <img src="Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.32.05.png" style="zoom:100%;" /> |
 | :----------------------------------------------------------: |
 |         **Fig 3.1** The grid world policy evaluation         |
 
@@ -122,14 +122,14 @@ On average, how many steps until hit the terminal state?
 
 
 
-|      Iteration       |                   $v_k$ for random policy                    |                  Greedy policy w.r.t. $v_k$                  |
+|      Iteration       |                   $v_k$ for random policy                    |                 Greedy policy *w.r.t.* $v_k$                 |
 | :------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-|         k=0          | ![Screenshot 2020-06-02 at 16.45.53](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.45.53.png) | ![Screenshot 2020-06-02 at 16.46.15](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.15.png) |
-|         k=1          | ![Screenshot 2020-06-02 at 16.45.59](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.45.59.png) | ![Screenshot 2020-06-02 at 16.46.21](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.21.png) |
-|         k=2          | ![Screenshot 2020-06-02 at 16.46.07](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.07.png) | ![Screenshot 2020-06-02 at 16.46.27](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.27.png) |
-|     k=3: optimal     | ![Screenshot 2020-06-02 at 16.46.34](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.34.png) | ![Screenshot 2020-06-02 at 16.46.46](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.46.png) |
-|         k=10         | ![Screenshot 2020-06-02 at 16.46.37](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.37.png) | ![Screenshot 2020-06-02 at 16.46.52](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.52.png) |
-| k=$\infty$: converge | ![Screenshot 2020-06-02 at 16.46.41](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.41.png) | ![Screenshot 2020-06-02 at 16.46.56](/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.56.png) |
+|         k=0          | ![Screenshot 2020-06-02 at 16.45.53](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.45.53.png) | ![Screenshot 2020-06-02 at 16.46.15](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.15.png) |
+|         k=1          | ![Screenshot 2020-06-02 at 16.45.59](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.45.59.png) | ![Screenshot 2020-06-02 at 16.46.21](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.21.png) |
+|         k=2          | ![Screenshot 2020-06-02 at 16.46.07](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.07.png) | ![Screenshot 2020-06-02 at 16.46.27](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.27.png) |
+|     k=3: optimal     | ![Screenshot 2020-06-02 at 16.46.34](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.34.png) | ![Screenshot 2020-06-02 at 16.46.46](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.46.png) |
+|         k=10         | ![Screenshot 2020-06-02 at 16.46.37](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.37.png) | ![Screenshot 2020-06-02 at 16.46.52](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.52.png) |
+| k=$\infty$: converge | ![Screenshot 2020-06-02 at 16.46.41](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.41.png) | ![Screenshot 2020-06-02 at 16.46.56](Lecture 3_DP.assets/Screenshot 2020-06-02 at 16.46.56.png) |
 |                      |           **Fig 3.2** Iteration policy evaluation            |                                                              |
 
 
@@ -153,7 +153,7 @@ $$
 v_\pi(s) = \mathbb E[R_{t+1}+\gamma R_{t+2}+...|S_t=s]
 $$
 
-2. Improve the policy by acting greedily w.r.t. $v_\pi$
+2. Improve the policy by acting greedily *w.r.t.* $v_\pi$
 
 $$
 \pi' = greedy(v_\pi)
@@ -167,7 +167,7 @@ The process of policy iteration always **converges** to $\pi^*$.
 
 
 
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 17.17.41.png" style="zoom:67%;" /> |
+| <img src="Lecture 3_DP.assets/Screenshot 2020-06-02 at 17.17.41.png" style="zoom:67%;" /> |
 | :----------------------------------------------------------: |
 |  **Fig 3.3** Policy iteration of improvement and evaluation  |
 
@@ -252,9 +252,8 @@ A policy $\pi(a|s)$ achieves the optimal value from state *s*, $v_\pi(a|s)=v_*(s
 
 #### 4.2 Deterministic value iteration
 
-If we know the solution to subproblems $v_*(s')$.
+If we know the solution to subproblems $v_*(s')$, the solution $v_*(s)$ can be found by one-step lookahead using Bellman optimality equation:
 
-The solution $v_*(s)$ can be found by one-step lookahead using Bellman optimality equation:
 $$
 v_*(s)\leftarrow \max_{a\in \mathcal A}\mathcal R_s^a+\gamma \sum_{s'\in \mathcal S}\mathcal P_{ss'}^av_*(s')
 $$
@@ -265,7 +264,7 @@ $$
 
 
 
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 18.47.38.png" style="zoom:50%;" /> |
+| <img src="Lecture 3_DP.assets/Screenshot 2020-06-02 at 18.47.38.png" style="zoom:50%;" /> |
 | :----------------------------------------------------------: |
 |        **Fig 3.4** Find the shortest path in the grid        |
 
@@ -302,7 +301,7 @@ $$
 $$
 
 
-| <img src="/Users/kevinxu95/Selfstudy/Reinforcement Learning/Notes/Lecture 3_DP.assets/Screenshot 2020-06-02 at 19.39.57.png" style="zoom:50%;" /> |
+| <img src="Lecture 3_DP.assets/Screenshot 2020-06-02 at 19.39.57.png" style="zoom:50%;" /> |
 | :----------------------------------------------------------: |
 | **Fig 3.5** Value iteration using Bellman optimality backup  |
 
@@ -468,6 +467,7 @@ $$
 $$
 
 
+
 #### 6.4 Convergence of policy iteration
 
 - The Bellman expectation operator $T^\pi$ has a unique fixed point.
@@ -490,6 +490,7 @@ which is a $\gamma$-contraction that makes value functions closer by at least $\
 $$
 \Vert T^*(u)-T^*(v)\Vert_\infty\leq\gamma\Vert u-v\Vert_\infty\
 $$
+
 
 
 #### 6.6 Convergence of value iteration

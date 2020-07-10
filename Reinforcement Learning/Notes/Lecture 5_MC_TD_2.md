@@ -32,7 +32,7 @@ Some example problems that can be modelled as MDPs:
 For most of these problems, either:
 
 - MDP model is unknown, but experience can be sampled.
-- MDP model is known, but is too big to use, except by samples.
+- MDP model is known, but is too big to use, except by sampling.
 
 Model-free control can solve these problems.
 
@@ -86,8 +86,8 @@ The simplest idea for ensuring continual exploration is to use $\epsilon$-greedy
 
 It ensures all *m* actions are tried with non-zero probability.
 
-- With probability $1-\epsilon$, choose the greedy action.
-- With probability $\epsilon$, choose an action at random.
+- With probability $1-\epsilon$, choose the **greedy** action.
+- With probability $\epsilon$, choose an action at **random**.
 
 $$
 \pi(a|s)=\cases {\epsilon/m+1-\epsilon & if a*=argmax Q(s,a) \\ \epsilon/m  &\text{otherwise}}
@@ -153,7 +153,7 @@ $$
 
 **Algorithm**:
 
-1. Sample *k* episode using $\pi$: $\{S_1,A_1, R_2,...,S_T\}\sim\pi$.
+1. Sample *k* episodes using $\pi$: $\{S_1,A_1, R_2,...,S_T\}\sim\pi$.
 
 2. For each state $S_t$ and action $A_t$ in the episode, evaluate:
 
@@ -209,7 +209,7 @@ At every **time step**:
 - Policy evaluation: Sarsa, $Q\approx q_\pi$.
 - Policy improvement: $\epsilon$-greedy policy improvement.
 
-We update the value function after one step of Sarsa.
+We update the value function after **one step** of Sarsa.
 
 The policy is implicitly represented by the Q value.
 
@@ -221,18 +221,18 @@ The policy is implicitly represented by the Q value.
 
 #### 3.4 Sarsa
 
-| Sarsa algorithm for on-policy control:                       |
-| ------------------------------------------------------------ |
-| **Initialise** $Q(s,a), \forall s\in\mathcal S, a\in \mathcal A(s)$ arbitrarily, and $Q(terminalstate,\cdot)=0$ |
-| **Repeat** (for each episode):                               |
-| Initialise $S$                                               |
-| Choose $A$ from $S$ using policy derived from $Q$ (e.g. $\epsilon$-greedy) |
-| **Repeat** (for each step of episode):                       |
-| Take action $A$, observe $R,S'$                              |
-| Choose $A'$ from $S'$ using policy derived from $Q$ (e.g. $\epsilon$-greedy) |
-| $Q(S,A)\larr Q(S,A)+\alpha(R+\gamma Q(S',A')-Q(S,A))$        |
-| $S\larr S'; A\larr A'$                                       |
-| **until** $S$ is terminal                                    |
+**Sarsa algorithm for on-policy control**:
+
+> **Initialise** $Q(s,a), \forall s\in\mathcal S, a\in \mathcal A(s)$ arbitrarily, and $Q(terminalstate,\cdot)=0$
+> **Repeat** (for each episode):
+> 		Initialise $S$
+> 		Choose $A$ from $S$ using policy derived from $Q$ (e.g. $\epsilon$-greedy) 
+> 		**Repeat** (for each step of episode): 
+> 				Take action $A$, observe $R,S'$
+> 				Choose $A'$ from $S'$ using policy derived from $Q$ (e.g. $\epsilon$-greedy)
+> 				$Q(S,A)\larr Q(S,A)+\alpha(R+\gamma Q(S',A')-Q(S,A))$
+> 				$S\larr S'; A\larr A'$
+> 		**Until** $S$ is terminal
 
 
 
@@ -262,10 +262,11 @@ Define the *n*-step Q-return:
 $$
 q_t^{(n)} = R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^nQ(S_{t+n})
 $$
-*n*-Step Sarsa updates $Q(s,a)$ towards the *n*-step Q-return
+*n*-Step Sarsa updates $Q(s,a)$ towards the *n*-step Q-return:
 $$
 Q(S_t,A_t)\larr Q(S_t,A_t)+\alpha(q_t^{(n)}- Q(S_t,A_t))
 $$
+
 
 
 #### 3.7 Forward-view Sarsa($\lambda$)
@@ -280,6 +281,7 @@ Forward-view Sarsa($\lambda$) updates $Q(s,a)$ towards the $q^\lambda$ return:
 $$
 Q(S_t,A_t)\larr Q(S_t,A_t)+\alpha(q_t^\lambda- Q(S_t,A_t))
 $$
+
 
 
 #### 3.8 Backward-view Sarsa($\lambda$)
@@ -303,22 +305,35 @@ $$
 
 #### 3.9 Sarsa($\lambda$)
 
-| Sarsa($\lambda$) algorithm with eligibility trace:           |
-| ------------------------------------------------------------ |
-| **Initialise** $Q(s,a), \forall s\in\mathcal S, a\in \mathcal A(s)$ arbitrarily​ |
-| **Repeat** (for each episode):                               |
-| $E(s,a)=0, \forall s\in\mathcal S, a\in \mathcal A(s)$       |
-| Initialise S,A                                               |
-| **Repeat** (for each step of episode):                       |
-| Take action $A$, observe $R,S'$                              |
-| Choose $A'$ from $S'$ using policy derived from $Q$ (e.g. $\epsilon$-greedy) |
-| $\delta \larr R+\gamma Q(S',A')-Q(S,A)$                      |
-| $E(S,A)\larr E(S,A)+1$                                       |
-| For all $s\in\mathcal S, a\in \mathcal A(s)$:                |
-| $Q(s,a)\larr Q(s,a)+\alpha\delta E(s,a)$                     |
-| $E(s,a) \larr \gamma\lambda E(s,a)$                          |
-| $S\larr S';A\larr A'$                                        |
-| **until** S is terminal                                      |
+**Sarsa($\lambda$) algorithm with eligibility trace**:
+
+> **Initialise** $Q(s,a), \forall s\in\mathcal S, a\in \mathcal A(s)$ arbitrarily
+>
+> **Repeat** (for each episode):
+>
+> ​		$E(s,a)=0, \forall s\in\mathcal S, a\in \mathcal A(s)$
+>
+> ​		Initialise S,A
+>
+> ​		**Repeat** (for each step of episode):
+>
+> ​				Take action $A$, observe $R,S'$
+>
+> ​				Choose $A'$ from $S'$ using policy derived from $Q$ (e.g. $\epsilon$-greedy)
+>
+> ​				$\delta \larr R+\gamma Q(S',A')-Q(S,A)$
+>
+> ​				$E(S,A)\larr E(S,A)+1$
+>
+> ​				For all $s\in\mathcal S, a\in \mathcal A(s)$:
+>
+> ​						$Q(s,a)\larr Q(s,a)+\alpha\delta E(s,a)$
+>
+> ​						$E(s,a) \larr \gamma\lambda E(s,a)$
+>
+> ​				$S\larr S';A\larr A'$
+>
+> ​		**Until** $S$ is terminal
 
 
 
@@ -347,10 +362,10 @@ In off-policy learning, we
 
 It is important when:
 
-- Learn from observing humans or other agents.
-- Re-use experience generated from old policies $\pi_1, \pi_2,...,\pi_{t-1}$.
+- Learn from **observing** humans or other agents.
+- **Re-use** experience generated from old policies $\pi_1, \pi_2,...,\pi_{t-1}$.
 - Learn about **optimal** policy while following **exploratory** policy.
-- Learn about *multiple* policies while following *one* policy.
+- Learn about **multiple** policies while following *one* policy.
 
 
 
@@ -360,6 +375,7 @@ We can estimate the expectation of a different distribution by:
 $$
 \begin{align}\mathbb E_{X\sim P}[f(X)]&=\sum P(X)f(X) \\&=\sum Q(X)\frac{P(X)}{Q(X)}f(X) \\&=\mathbb E_{X\sim Q}[\frac{P(X)}{Q(X)}f(X)]\end{align}
 $$
+
 
 
 #### 4.3 Importance sampling for off-policy MC
@@ -379,7 +395,7 @@ $$
 V(S_t)\larr V(S_t)+\alpha(G_t^{\pi/\mu}-V(S_t))
 $$
 
-Monte-Carlo is bad with off-policy learning because of too high variance by multiple importance sampling.
+Monte-Carlo is **bad** with off-policy learning because of too high variance by multiple importance sampling.
 
 
 
@@ -396,7 +412,7 @@ $$
 
 Temporal-difference has much **lower variance** than Monte-Carlo importance sampling.
 
-- Policies only need to be similar over a single step.
+- Policies only need to be similar over a **single** step.
 
 
 
@@ -447,19 +463,25 @@ $$
 
 Q-learning control converges to the optimal action-value function, $Q(s,a)\rarr q_*(s,a)$.
 
-**Algorithm**:
+**Q-learning (SARSAMAX)**:
 
-| Q-learning (SARSAMAX):                                       |
-| ------------------------------------------------------------ |
-| **Initialise** $Q(s,a) \forall s\in\mathcal S, a\in\mathcal A(s)$ arbitrarily, and $Q(terminalstate,\cdot)=0$ |
-| **Repeat** (for each episode):                               |
-| Initialise $S$                                               |
-| **Repeat** (for each step of episode):                       |
-| Choose $A$ from $S$ using policy derived from $Q$ e.g. $\epsilon$-greedy |
-| Take action $A$, observe $R,S'$                              |
-| $Q(S,A)\larr Q(S,A)+\alpha[R+\gamma \max\limits_aQ(S',a)-Q(S,A)]$ |
-| $S\larr S'$                                                  |
-| **until** $S$ is terminal                                    |
+> **Initialise** $Q(s,a) \forall s\in\mathcal S, a\in\mathcal A(s)$ arbitrarily, and $Q(terminalstate,\cdot)=0$
+>
+> **Repeat** (for each episode):
+>
+> ​		Initialise $S$
+>
+> ​		**Repeat** (for each step of episode):
+>
+> ​				Choose $A$ from $S$ using policy derived from $Q$ e.g. $\epsilon$-greedy
+>
+> ​				Take action $A$, observe $R,S'$
+>
+> ​				$Q(S,A)\larr Q(S,A)+\alpha[R+\gamma \max\limits_aQ(S',a)-Q(S,A)]$
+>
+> ​				$S\larr S'$
+>
+> ​		**Until** $S$ is terminal
 
 
 
