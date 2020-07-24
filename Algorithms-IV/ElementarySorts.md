@@ -84,7 +84,7 @@ private static boolean isSorted(Comparable[] a)
 
 ### 2. Selection sort
 
-#### 2.1 Process
+#### 2.1 Overview
 
 In iteration *i*, 
 
@@ -143,7 +143,7 @@ Selection sort uses $(N-1)+(N-2)+\dots+1+0\sim N^2/2$ compares and *N* exchanges
 
 ### 3. Insertion sort
 
-#### 3.1 Process
+#### 3.1 Overview
 
 In iteration *i*,
 
@@ -225,4 +225,153 @@ For partially-sorted arrays, insertion sort runs in **linear time**.
 $$
 \text{No. compares} = \text {No. inversions} + (N-1)
 $$
+
+
+
+### 4. Shellsort
+
+#### 4.1 Overview
+
+**Idea**: Move entries more than one position at a time by *h-sorting* the array.
+
+- An h-sorted array is *h* interleaved sorted subsequences.
+- We h-sort array for **decreasing** sequence of values of *h*.
+
+
+
+| <img src="ElementarySorts.assets/Screenshot 2020-07-24 at 08.17.56.png" style="zoom:50%;" /> |
+| :----------------------------------------------------------: |
+|         **Fig 3.2** h-sorted array as h interleaved          |
+
+
+
+#### 4.2 H-sorting
+
+We h-sort an array by **insertion sort**, with stride length *h*.
+
+- Big increments $\rarr$ small subarray.
+- Small increments $\rarr$ nearly in order.
+
+
+
+| <img src="ElementarySorts.assets/Screenshot 2020-07-24 at 08.33.04.png" style="zoom:50%;" /> | <img src="ElementarySorts.assets/Screenshot 2020-07-24 at 08.33.08.png" style="zoom:50%;" /> |
+| -----------------------------------------------------------: | :----------------------------------------------------------- |
+|                                        **Fig 3.3** Shellsort | with increments 7,3,1                                        |
+
+
+
+#### 4.3 Intuition
+
+A *g*-sorted array remains *g*-sorted after *h*-sorting it.
+
+**Increment sequence** to use:
+
+- Powers of two: No, duplicate compares.
+
+- $3x+1$: OK, easy to compute.
+- Sedgewick: 1,5,19,41,... Good.
+
+
+
+#### 4.4 Implementation
+
+```Java
+public class Shell
+{
+  	public static void sort(Comparable[] a)
+    {
+      	int N = a.length;
+      	int h = 1;
+      	while (h < N/3) h = 3*h+1; // increment sequence
+      
+      	while (h >= 1)
+        {
+          	for (int i = h; i < N; i++) // insertion sort
+            {
+              	for (int j = i; j >= h && 
+                     less(a[j], a[j-h]); j -= h)
+                  	exch(a, j, j-h);
+            }
+          	h = h/3; // move to next increment
+        }
+    }
+  
+  	private static boolean less(Comparable v, w)
+    {}
+  	private static void exch(Comparable[] a, int i, int j)
+    {}
+}
+```
+
+
+
+#### 4.5 Analysis
+
+- The worst-case number of compares used by shellsort with the $3x+1$ increments is $O(N^{3/2})$.
+- Number of compares used by shellsort with the $3x+1$ increments is at most by a small multiple of $N$ times number of increments used.
+
+Actual model has not yet been discovered.
+
+
+
+#### 4.6 Why are we interested in shellsort?
+
+1. Example of simple idea leading to substantial performance gains.
+2. Useful in practice.
+   - Fast unless array size is huge.
+   - Tiny fixed footprint for code.
+   - Hardware sort prototype.
+3. Simple algorithm, nontrivial performance, interesting questions.
+   - Asymptotic growth rate?
+   - Best sequence of increments?
+   - Average-case performance?
+
+
+
+### 5. Shuffling
+
+#### 5.1 How to shuffle an array?
+
+**Goal**: Rearrange array so that result is a **uniformly random** permutation.
+
+
+
+#### 5.2 Shuffle sort
+
+- Generate a random real number for each array entry.
+
+- Sort the array.
+
+Shuffle sort produces a uniformly random permutation of the input array, provided no duplicate values.
+
+
+
+#### 5.3 Knuth shuffle
+
+In iteration *i*,
+
+- Pick integer *r* between *0* and *i* uniformly at random.
+- Swap *a[i]* and *a[r]*.
+
+**Fisher-Yates 1938**: Knuth shuffling algorithm produces a uniformly random permutation of the input array in **linear time**.
+
+
+
+#### 5.4 Implemtation
+
+```java
+public class StdRandom
+{
+  	...
+    public static void shuffle(Object[] a)
+    {
+      	int N = a.length;
+      	for (int i = 0; i < N; i++)
+        {
+          	int r = StdRandom.uniform(i + 1); // 0 to i
+          	exch(a, i, r);
+        }
+    }
+}
+```
 
