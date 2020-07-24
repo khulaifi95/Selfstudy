@@ -2,7 +2,7 @@
 
 
 
-## Lecture 3. Elementary Sorts
+## Lecture 3: Elementary Sorts
 
 
 
