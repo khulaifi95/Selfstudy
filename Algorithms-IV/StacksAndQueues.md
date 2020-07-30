@@ -60,8 +60,6 @@ Insert/ remove from the front.
 
 - Inner class:
 
-#### 
-
 ```java
 private class Node
 {
@@ -388,11 +386,132 @@ public class LinkedQueueOfStrings
 
 
 
-### 4.5 Resizing-array implemtation
+#### 4.5 Resizing-array implemtation
 
 - Use array *q()* to store items in queue.
 - `enqueue()`: add new item at *q[tail]*.
 - `dequeue()`: remove item from *q[head]*.
 - Update *head* and *tail* modulo the capacity.
 - Add resizing array.
+
+
+
+### 5. Iterators
+
+#### 5.1 Iterator API
+
+- An `Iterable` has a method that returns an `Iterator`.
+
+```java
+public interface Iterable<Item>
+{
+		Iterator<Item> iterator();
+}
+```
+
+- An `Iterator` has methods `hasNext()` and `next()`.
+
+```java
+public interface Iterator<Item>
+{
+		boolean hasNext();
+		Item next();
+		void remove();	//optional
+}
+```
+
+- Using an `Iterable` in client with `for` loops.
+
+```java
+Iterator<String> i = stack.iterator();
+while (i.hasNext())
+{
+		String s = i.next();
+		StdOut.println(s);
+}
+```
+
+
+
+#### 5.2 Stack iterator linked-list implementation
+
+```java
+public class ListIterator implements Iterator<Item>
+{
+  	private Node current = first;
+  	
+  	public boolean hasNext()
+    {  return current != null;  }
+  	public Item next()
+    {
+        Item item = current.item;
+        current = current.next;
+      	return item;
+    }
+}
+```
+
+
+
+#### 5.3 Stack iterator array implementation
+
+```java
+public class ReverseArrayIterator implements Iterator<Item>
+{
+  	private int i = N;
+  	
+  	public boolean hasNext()
+    {  return i > 0;  }
+  	public Item next()
+    {  return s[--i]; }
+}
+```
+
+
+
+#### 5.4 Bag API
+
+Add items to a collection and iterate through when **order doesn't matter**.
+
+|   public class | Bag<Item> implements | Iterable<Item>          |
+| -------------: | -------------------- | ----------------------- |
+|                | Bag()                | Create an empty bag.    |
+|           void | add(Item x)          | Insert a new item.      |
+|            int | size()               | Number of items in bag. |
+| Iterable<Item> | iterator()           | Iterator for all items. |
+
+The implementation is the same as a **stack** without `pop` or queue without `dequeue`.
+
+
+
+### 6. Applications
+
+**Dijkstra's Two-stack Algorithm**:
+
+```java
+public class Evaluate
+{
+  	public static void main(String[] args)
+    {
+      	Stack<String> ops = new Stack<String>();
+      	Stack<Double> vals = new Stack<Double>();
+      	while (!StdIn.isEmpty()) {
+          	String s = StdIn.readString();
+          	if (s.equals("("));
+          	else if (s.equals("+"))	ops.push(s);
+          	else if (s.equals("*")) ops.push(s);
+          	else if (s.equals(")"))  // evaluation
+          	{
+            		String op = ops.pop();
+            		if (op.equals("+"))
+              	{  vals.push(vals.pop() + vals.pop())  };
+            		else if (op.equals("*"))
+              	{  vals.push(vals.pop() * vals.pop())  };
+          	}
+          	else vals.push(Double.parseDouble(s));
+        }
+      	StdOut.println(vals.pop());
+    }
+}
+```
 
