@@ -32,4 +32,4 @@ class Solution(object):
 
 
 a = Solution()
-print(a.isMatch('abcccccbbbbccc', 'abc*b*.b*.c*'))
+print(a.dp_isMatch('abcccccbbbbccc', 'abc*b*.b*.c*'))
