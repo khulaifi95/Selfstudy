@@ -12,10 +12,6 @@
 
 A `collection` is a data type that stores a group of items.
 
-```
-
-```
-
 
 
 | data type      | core operations             | data structure                 |
@@ -251,4 +247,26 @@ public class MaxPQ<key extends Comparable<Key>>
 #### 2.8 Implementation cost
 
 Binary heap returns **logarithmic** cost for `insert` and `del_max` operations.
+
+
+
+#### 2.9 Practical improvements
+
+1. Do *half-exchanges* in sink and swim.
+   - Reduces number of array accesses.
+   - Worth doing.
+2. Floyd's *bounce* heuristic.
+   - Sink key at root all the way to bottom.
+   - Swim key back up.
+   - Overall, *fewer* compares and *more* exchanges.
+3. Multi-way heaps.
+   - Complete *d*-way tree.
+   - Parent's key no smaller than its children's keys.
+   - Height on *n* nodes is about $\log_d n$.
+   - `Insert` action costs $\log_d n$.
+   - `Delete max` action costs $d\log_d n$.
+
+
+
+### 3. Heap sort
 
