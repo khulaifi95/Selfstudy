@@ -1,0 +1,64 @@
+## Merge Sorted Arrays
+
+
+
+#### Question:
+
+You are given two sorted arrays, A and B, where A has a large enough buffer at the end to hold B. Write a method to merge B into A in sorted order.
+
+Initially the number of elements in A and B are m and n respectively.
+
+
+
+#### Example:
+
+```pseudocode
+Input:
+A = [1,2,3,0,0,0], m = 3
+B = [2,5,6],       n = 3
+
+Output: [1,2,2,3,5,6]
+```
+
+
+
+#### Solution:
+
+We can observe that the two input arrays are **partailly sorted subarrays** of the merged array.
+
+We use the `merge` method in merge sort as an analog.
+
+- **Two pointers** on the arrays respectively, comparing the elements with each other.
+- Pointers **start from the end** utilise the empty slots in $A$.
+
+
+
+#### Code:
+
+```python
+class Solution:
+	def merge(self, A, m, B, n):
+        pa, pb = m-1, n-1
+        tail = m + n - 1
+        while pa >= 0 or pb >= 0:
+            if pa == -1:
+                A[tail] = B[pb]
+                pb -= 1
+            elif pb == -1:
+                A[tail] = A[pa]
+                pa -= 1
+            elif A[pa] > B[pb]:
+                A[tail] = A[pa]
+                pa -= 1
+            else:
+                A[tail] = B[pb]
+                pb -= 1
+                
+            tail -= 1
+        
+```
+
+
+
+
+

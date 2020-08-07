@@ -1,0 +1,73 @@
+## Valid Palindrome
+
+
+
+#### Question:
+
+Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+- For the purpose of this problem, we define empty string as valid palindrome.
+- `s` consists only of printable ASCII characters.
+
+
+
+#### Example:
+
+```pseudocode
+Input: "A man, a plan, a canal: Panama"
+Output: true
+```
+
+```pseudocode
+Input: "race a car"
+Output: false
+```
+
+
+
+#### Solution:
+
+1. The most important part is to filter all **number and letter** characters in lower case.
+
+- In Python and C++, we have the built-in function `isalnum()` to check for it:
+
+```python
+sgood = "".join(char.lower()) for char in s if char.isalnum()
+```
+
+- The first method is to simply check the reversed list of strings:
+
+```python
+return sgood == sgood[::-1]
+```
+
+
+
+2. We can also use **two pointers** on each end of the string to check **in-place**.
+
+- The pointers move towards each other whenever the character is not a letter or number.
+- Return `False` directly when the pair of characters don't match.
+
+
+
+#### Code:
+
+```python
+class Solution:
+    def validPalindrome(self, s: str) -> bool:
+        n = len(s)
+        left, right = 0, n - 1
+        
+        while left < right:
+            while left < right and not s[left].isalnum():
+                left += 1
+            while left < right and not s[right].isalnum():
+                right -= 1
+            if left < right:
+                if s[left].lower() != s[right].lower():
+                    return False
+                left, right = left + 1, right - 1
+                
+		return True                
+```
+

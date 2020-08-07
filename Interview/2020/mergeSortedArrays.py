@@ -1,7 +1,8 @@
+from typing import List
+
 
 class Solution:
-    def merge(self, A, m, B, n):
-        sorted = []
+    def merge(self, A: List[int], m: int, B: List[int], n: int) -> None:
         pa, pb = m-1, n-1
         tail = m + n - 1
         while pa >= 0 or pb >= 0:
