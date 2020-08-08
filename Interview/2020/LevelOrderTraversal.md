@@ -4,7 +4,7 @@
 
 #### Question:
 
-Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+Given a binary tree, return the level order traversal of its nodes' values. (i.e. from left to right, level by level).
 
 
 
@@ -33,4 +33,84 @@ Return its level order traversal as:
 
 
 #### Solution:
+
+1. Breadth-first search satisfies the traversal sequence of the problem.
+
+   - Need `queue` as auxiliary structure to save the nodes.
+
+   ```python
+   def bfs(root):
+       if not root:
+           return []
+       queue = [root,]
+       while queue:
+           node = queue.pop()
+           if node.left:
+               queue.append(node.left)
+           if node.right:
+               queue.append(node.right)
+   ```
+
+   - We record the size of  list at each level to add nodes at one sweep.
+
+
+
+2. Depth-first search uses recursive structure to traversal the tree nodes.
+
+```python
+def dns(root):
+    if not root:
+        return []
+    dfs(root.left)
+    dfs(root.right)
+```
+
+- We index the nodes with the level they are in.
+- Insert a new list if the index surpasses the length of result.
+
+
+
+#### Code:
+
+```python
+class Solution:
+	def levelOrderBFS(self, root: TreeNode) -> List[List[int]]:
+    	if not root:
+            return []
+        res = []
+        queue = [root,]
+        
+        while queue:
+            size = len(queue)
+            lvl = []
+            
+            for _ in range(size):
+                node = queue.pop(0)
+                lvl.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                    
+            res.append(lvl)
+        return res
+    
+    def levelOrderDFS(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        res = []
+        
+        def dfs(index, r):
+            if len(res) < index:
+                res.append([])
+            res[index-1].append(r.val)
+            if r.left:
+                dfs(index+1, r.left)
+            if r.right:
+                dfs(index+1, r.right)
+        
+        dfs(1, root)
+        return res
+            
+```
 

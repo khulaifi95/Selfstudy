@@ -13,21 +13,21 @@ class Solution:
         if not root:
             return []
         res = []
-        queue = [root]
+        queue = [root,]
 
         while queue:
             size = len(queue)
-            tmp = []
+            lvl = []
 
-            for _ in xrange(size):
-                r = queue.pop(0)
-                tmp.append(r.val)
-                if r.left:
-                    queue.append(r.left)
-                if r.right:
-                    queue.append(r.right)
-            # Add temporary to result.
-            res.append(tmp)
+            for _ in range(size):
+                node = queue.pop(0)
+                tmp.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            # Add level list to result.
+            res.append(lvl)
         return res
 
 
