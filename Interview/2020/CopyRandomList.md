@@ -1,0 +1,115 @@
+## Copy Random List
+
+
+
+#### Question:
+
+A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+
+Return a deep copy of the list.
+
+Each node is represented as a pair of `[val, random_index] ` where:
+
+- `val`: an integer representing `Node.val`.
+- `random_index`: the index of the node (range from 0 to n-1) where random pointer points to, or null if it does not point to any node.
+
+
+
+#### Example:
+
+| <img src="CopyRandomList.assets/Screenshot from 2020-08-08 20-56-42.png" style="zoom:67%;" /> |
+| :----------------------------------------------------------: |
+| **Fig 1**. Data structure of the linked list with random pointers |
+
+
+
+```pseudocode
+Input: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
+```
+
+
+
+#### Solution:
+
+We can save time by creating a `visited` tag for copies of each node.
+
+1. **Backtracking**
+
+We backtrack the `random` and `next` pointers respectively.
+
+Starting from the `Head` node:
+
+- Check if the current node is copied.
+- If not, create a new node and save it in the `visited` dictionary.
+- **Recursively** call two pointers.
+
+```python
+if head in self.visited:
+    return self.visited[head]
+
+node = Node(head.val, None, None)
+self.visited[head] = node
+
+node.next = self.copyRandomList(head.next)
+node.random = self.copyRandomList(head.random)
+```
+
+
+
+2. **Iteration**
+
+We traverse the linked list from `Head` and create new nodes visited by two pointers.
+
+Iterating from the `Head` node:
+
+- Create new node as the copy and save into the `visited` dictionary.
+- Copy the next node on the `random` pointer, check for `visited`.
+- Copy the `next` node, check for `visited`.
+
+
+
+3. **Twisted iteration**
+
+We can copy all the nodes by their side.
+
+- Traverse the linked list and create a copy for each node by its side.
+- Use old nodes' `random` pointer to update the new nodes' `random` pointer.
+- Unweave the list and fix the `next` pointers to separate lists.
+
+
+
+#### Code:
+
+```python
+class Solution:
+	def copyRandomList(self, head: 'Node') -> 'Node':
+        if not head:
+            return head
+
+        ptr = head
+        while ptr:
+            new_node = Node(ptr.val, None, None)
+            new_node.next = ptr.next
+            ptr.next = new_node
+            ptr = new_node.next
+
+        ptr = head
+        while ptr:
+            ptr.next.random = ptr.random.next if ptr.random else None
+            ptr = ptr.next.next
+
+        ptr_old_list = head
+        ptr_new_list = head.next
+        head_old = head.next
+
+        while ptr_old_list:
+            ptr_old_list.next = ptr_old_list.next.next
+            ptr_new_list.next = ptr_new_list.next.next if ptr_new_list.next else None
+            ptr_old_list = ptr_old_list.next
+            ptr_new_list = ptr_new_list.next
+
+        return head_old
+        
+```
+

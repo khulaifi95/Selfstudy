@@ -1,8 +1,12 @@
+
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+
+
 class Solution:
-    '''
-    :type head: None
-    :rtype: Node
-    '''
 
     def __init__(self):
         self.visited = {}
@@ -49,10 +53,13 @@ class Solution:
 
         return self.visited[head]
 
-    def copyRandomList(self, head):
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        # Time:  O(n)
+        # Space: O(1)
         if not head:
             return head
 
+        # Create new copy next to the old node.
         ptr = head
         while ptr:
             new_node = Node(ptr.val, None, None)
@@ -61,8 +68,8 @@ class Solution:
             ptr.next = new_node
             ptr = new_node.next
 
+        # Update random pointer of the new copies.
         ptr = head
-
         while ptr:
             ptr.next.random = ptr.random.next if ptr.random else None
             ptr = ptr.next.next
@@ -74,7 +81,7 @@ class Solution:
 
         while ptr_old_list:
             ptr_old_list.next = ptr_old_list.next.next
-            ptr_new_list.next = ptr_new_list.next.next if ptr_new_list else None
+            ptr_new_list.next = ptr_new_list.next.next if ptr_new_list.next else None
             ptr_old_list = ptr_old_list.next
             ptr_new_list = ptr_new_list.next
 

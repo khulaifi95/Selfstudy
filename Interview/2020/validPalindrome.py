@@ -9,6 +9,8 @@ class Solution:
         return sgood == sgood[::-1]
 
     def validPalindrome(self, s: str) -> bool:
+        # Time:  O(|s|)
+        # Space: O(1)
         n = len(s)
         left, right = 0, n - 1
 

@@ -2,6 +2,8 @@ from typing import List
 
 class Solution:
     def merge(self, nums: List[int], tmp: List[int], l: int, r: int) -> int:
+        # Time:  O(nlogn)
+        # Space: O(n)
         if l >= r:
             return 0
 

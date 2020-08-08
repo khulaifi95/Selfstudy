@@ -29,6 +29,8 @@ class Solution:
             # Add level list to result.
             res.append(lvl)
         return res
+        # Time:
+        # Space: 
 
 
     def levelOrderDFS(self, root: TreeNode) -> List[List[int]]:
