@@ -24,4 +24,23 @@ Output: 6
 
 
 #### Solution:
+1. **Brutal force**
+We directly calculate the height of water at each column.
+The rain one location can trap is the difference between the minimum of left/ right max height and the current height.
+
+2. **Dynamic programming**
+We can save the results of maximum heights in solution **1** in arrays.
+- Find the max height from current location to the left `lmax`.
+- Find the max height from current location to the right `rmax`.
+- Scan the two arrays and add up to the answer.
+
+3. **Stacking DP**
+We optimise the DP algorithm by adding a stack saving the boundary of the current column.
+- Update the stack if current column is higher and calculate the distance to the max height `dist`.
+- Find the bounded height: $bounded_height = \min(height[curr], height[stack.pop()]) - height[top])$.
+- Add the trapped water to the answer: $ans += dist \times bounded_height$.
+
+4. **Double pointers**
+We notice that the height of trapped water is determined by the max height at the **lower** side.
+- We can use two pointers starting from each end of the array to traverse in one sweep.
 
