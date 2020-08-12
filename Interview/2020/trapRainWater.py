@@ -1,3 +1,4 @@
+from typing import List
 
 class Solution:
     def trapWater(self, height: List[int]) -> int:
@@ -44,12 +45,12 @@ class Solution:
         ans, curr = 0, 0
         stack = []
         while curr < len(height):
-            while stack is not None and (height[curr] > height[stack[-1]]):
+            while stack and (height[curr] > height[stack[-1]]):
                 top = stack.pop()
-                if stack is None:
+                if not stack:
                     break
                 dist = curr - stack[-1] - 1
-                bounded_height = min(height[curr], height[stack[-1]) - height[top]
+                bounded_height = min(height[curr], height[stack[-1]]) - height[top]
                 ans += dist * bounded_height
             
             stack.push(curr)
@@ -60,10 +61,9 @@ class Solution:
     def trapWater2PTR(self, height: List[int]) -> int:
         # Time:  O(n)
         # Space: O(1)
-        left = 0
-        right = len(height) - 1
-        ans = 0
+        left, right = 0, len(height) - 1
         lmax, rmax = 0, 0
+        ans = 0
         
         while left < right:
             if height[left] < height[right]:
@@ -71,11 +71,13 @@ class Solution:
                     lmax = height[left]
                 else:
                     ans += lmax - height[left]
+                left += 1   # update left pointer
             else:
                 if height[right] >= rmax:
                     rmax = height[right]
                 else:
                     ans += rmax - height[right]
+                right -= 1  # update right pointer
                     
         return ans
         

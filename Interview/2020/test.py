@@ -2,8 +2,8 @@
 # print(bool(stack))
 # print(nums[3:6])
 # stack = [0]
-# import sys
 
+# import sys
 # print(sys.version)
 
 # def myisalnum(self, a: str) -> bool:
@@ -18,7 +18,17 @@
 # print(queue.pop(0))
 
 
-mapp = {1:5, 2:6}
+# mapp = {1:5, 2:6}
 
-mapp[1] = 12
-print(mapp[1])
+# mapp[1] = 12
+# print(mapp[1])
+
+# import sqlite3
+# print(dir(sqlite3))
+
+# for i in range(5, -1, -1):
+#     print(i)
+
+stack = [-1, -5]
+
+print(stack.pop(0))
