@@ -29,6 +29,26 @@
 # for i in range(5, -1, -1):
 #     print(i)
 
-stack = [-1, -5]
+# stack = [-1, -5]
 
-print(stack.pop(0))
+# print(stack.pop(0))
+
+# import collections
+
+# s = 'mississippi'
+
+# d = collections.defaultdict(int)
+# for k in s:
+#     d[k] += 1
+
+# print(d.items())
+
+# minl = float('inf')
+# print(minl)
+
+from collections import defaultdict
+d = defaultdict(int)
+t = "ABCDA"
+for i in t:
+    d[i] += 1
+print(list(d.items()))
