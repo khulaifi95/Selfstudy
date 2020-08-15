@@ -11,6 +11,7 @@ matplotlib
 networkx
 numpy
 pandas
+pep8
 pipenv
 Pillow
 pybullet
