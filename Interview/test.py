@@ -1,5 +1,5 @@
-stack = [[1,2],[2,3]]
+import sys
+import os
 
-for i,j in stack:
-	print(i+j)
 
+print(os.cwd())
