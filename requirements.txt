@@ -8,6 +8,7 @@ gym
 imageio
 ipython-sql
 jupyterlab
+kaggle
 matplotlib
 networkx
 numpy
