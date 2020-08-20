@@ -4,9 +4,10 @@ dgl
 future
 graphviz
 graphx
-gym[all]
+gym
 imageio
 ipython-sql
+ipywidgets
 jupyterlab
 kaggle
 matplotlib
