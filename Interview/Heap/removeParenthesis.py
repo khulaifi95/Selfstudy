@@ -1,5 +1,3 @@
-# s = "lee(t(c)o)de)"
-
 class Solution:
     def removeParenthesis(self, s: str) -> str:
         # Time:  O(n)
@@ -25,4 +23,3 @@ class Solution:
                 res.append(c)
 
         return "".join(res)
-
