@@ -46,9 +46,16 @@
 # minl = float('inf')
 # print(minl)
 
-from collections import defaultdict
-d = defaultdict(int)
-t = "ABCDA"
-for i in t:
-    d[i] += 1
-print(list(d.items()))
+# from collections import defaultdict
+# d = defaultdict(int)
+# t = "ABCDA"
+# for i in t:
+#     d[i] += 1
+# print(list(d.items()))
+
+from collections import deque
+r = 50
+d = deque([r])
+# d.popleft()
+d.append(20)
+print(len(d))

@@ -21,7 +21,7 @@ class Solution:
 
             for _ in range(size):
                 node = queue.pop(0)
-                tmp.append(node.val)
+                lvl.append(node.val)
                 if node.left:
                     queue.append(node.left)
                 if node.right:
@@ -29,8 +29,6 @@ class Solution:
             # Add level list to result.
             res.append(lvl)
         return res
-        # Time:
-        # Space: 
 
 
     def levelOrderDFS(self, root: TreeNode) -> List[List[int]]:
