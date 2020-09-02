@@ -22,6 +22,7 @@ pyspark
 pytest
 regex
 requests
+rospy
 scikit-image
 scikit-learn
 scikit-opt
