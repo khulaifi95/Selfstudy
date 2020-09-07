@@ -1,7 +1,5 @@
-from typing import List
-
 class Solution:
-    def maxArea(self, height: List[int]) -> int:
+    def maxArea(self, height: [int]) -> int:
         # Time:  O(n)
         # Space: O(1)
         l, r = 0, len(height) - 1

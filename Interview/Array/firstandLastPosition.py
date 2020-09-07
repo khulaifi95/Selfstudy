@@ -1,11 +1,8 @@
-from typing import List
-
-
 class Solution:
-    def searchRange(self, nums: List[int], target: int) -> List[int]:
+    def searchRange(self, nums: [int], target: int) -> [int]:
         # Time:  O(log n)
         # Space: O(1)
-        def search(nums: List[int], t: int) -> int:
+        def search(nums: [int], t: int) -> int:
             # find first position of entry >= t
             l = 0
             r = len(nums)

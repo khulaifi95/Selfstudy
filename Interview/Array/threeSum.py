@@ -1,7 +1,5 @@
-from typing import List
-
 class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
+    def threeSum(self, nums: [int]) -> [[int]]:
         # Time:  O(n^2)
         # Space: O(logN)
         n = len(nums)

@@ -1,8 +1,5 @@
-from typing import List
-
-
 class Solution:
-    def nextPermutation(self, nums: List[int]) -> None:
+    def nextPermutation(self, nums: [int]) -> None:
         # Time:  O(n)
         # Space: O(1)
         if len(nums) <= 1:

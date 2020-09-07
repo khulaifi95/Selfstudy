@@ -1,9 +1,6 @@
-from typing import List
-
-
 class Solution:
 
-    def findMedianMerge(self, nums1: List[int], nums2: List[int]) -> float:
+    def findMedianMerge(self, nums1: [int], nums2: [int]) -> float:
         # Time:  O(m+n)
         # Space: O(m+n)
         m, n = len(nums1), len(nums2)
@@ -32,7 +29,7 @@ class Solution:
         else:
             return (aux[tot // 2] + aux[tot // 2 - 1]) / 2
 
-    def findMedianBinary(self, nums1: List[int], nums2: List[int]) -> float:
+    def findMedianBinary(self, nums1: [int], nums2: [int]) -> float:
         # Time:  O(log(m+n))
         # Space: O(1)
         def getKthElement(k):
@@ -62,7 +59,7 @@ class Solution:
         else:
             return (getKthElement(tot // 2) + getKthElement(tot // 2 + 1) / 2)
 
-    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+    def findMedianSortedArrays(self, nums1: [int], nums2: [int]) -> float:
         # Time:  O(log(min(m,n)))
         # Space: O(1)
         if len(nums1) > len(nums2):
