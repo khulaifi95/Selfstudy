@@ -302,10 +302,7 @@ $$
 q_*(s,a) = \max_\pi q_\pi(s,a)
 $$
 
-- Specifies the best possible performance in the MDP.
-- MDP solved when we know the optimal value $q_*$.
-
-
+- Specifies the best possible performance in 
 
 | <img src="Lecture 2_MDP.assets/Screenshot 2020-05-19 at 13.08.20.png" style="zoom:50%;" /> |
 | :----------------------------------------------------------: |
