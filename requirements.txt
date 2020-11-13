@@ -29,7 +29,7 @@ scikit-opt
 scipy
 seaborn
 six
-tensorflow==1.15.3
+tensorflow==2.3.1
 torch
 torchvision
 TPOT
