@@ -137,3 +137,21 @@ Then input the next word in sentence $x_1$, etc.
 | :----------------------------------------------------------: |
 |             **Fig 6.3** RNN rolled out over time             |
 
+
+
+### 5. Cross entropy loss
+
+Next word prediction is essentially a classification task where the number of classes is the size of the vocabulary.
+
+Thus we use the cross-entropy loss, for one word:
+$$
+\mathcal L_\theta(\mathbf {y, \hat y})_t = -\mathbf y_t\log\mathbf {\hat y}_t
+$$
+For the sentence:
+$$
+\mathcal L_\theta(\mathbf {y, \hat y})_t = -\sum_{t=1}^T\mathbf y_t\log\mathbf {\hat y}_t
+$$
+with parameters $\theta = \{ \mathbf {W_y, W_x, W_h}\}$.
+
+
+
