@@ -1,0 +1,100 @@
+{
+  "main": {
+    "id": "0a41e7c4c30713c2",
+    "type": "split",
+    "children": [
+      {
+        "id": "7d35b5805c27f767",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "CS107.md",
+            "mode": "preview"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ddff0a5f35a91fee",
+    "type": "split",
+    "children": [
+      {
+        "id": "3f5ea54d07fe665e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1e7d1ddfc42d23dd",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "bc8e9a87d3100071",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "674ffbff9d3e3dd5",
+    "type": "split",
+    "children": [
+      {
+        "id": "da7bd403e858d960",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "871e30db7d1675ea",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "CS107.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "lastOpenFiles": [
+    "CS107.md",
+    "CS012.md",
+    "CS010.md",
+    "CS143.md",
+    "CS145.md",
+    "CS149.md",
+    "CS161.md",
+    "CS224n.md",
+    "CS229.md",
+    "CS231n.md"
+  ]
+}

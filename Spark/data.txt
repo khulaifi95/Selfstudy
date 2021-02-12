@@ -1,0 +1,6 @@
+crossing the chasm
+service A
+service B
+Network latency, congestion and failure
+logical or sacling failure
+cascading failure
